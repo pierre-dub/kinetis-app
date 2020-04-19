@@ -1,19 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import Connexion from "./component/connexion";
+import Settings from "./component/settings";
+import TabNavigator from "./component/tabNavigator";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Use App.tsx to start working on your application!</Text>
-    </View>
-  );
+import {createStackNavigator} from "@react-navigation/stack";
+import {NavigationContainer} from '@react-navigation/native';
+
+const Stack = createStackNavigator();
+
+function WelcomeStack() {
+    return (
+        <Stack.Navigator headerMode={"none"}>
+            <Stack.Screen name="Connexion" component={Connexion}/>
+            <Stack.Screen name="Home" component={TabNavigator} />
+            <Stack.Screen name="Settings" component={Settings} />
+        </Stack.Navigator>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+    return (
+        <NavigationContainer>
+            <WelcomeStack/>
+        </NavigationContainer>
+    );
+}
