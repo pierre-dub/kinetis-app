@@ -1,6 +1,6 @@
-import {Text, View, TouchableOpacity, Alert, Image, StyleSheet} from "react-native";
+import {Text, View, TouchableOpacity, Image, StyleSheet} from "react-native";
 import React from "react";
-import Home from "./home";
+import Home from "./Home";
 const logo = require('../assets/logo.png');
 
 interface Props {

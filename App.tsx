@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Connexion from "./component/connexion";
-import TabNavigator from "./component/tabNavigator";
-import workoutDetail from "./component/workoutDetail";
-
 import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from '@react-navigation/native';
 import {StatusBar, View} from "react-native";
+
+import Connexion from "./component/Connexion";
+import TabNavigator from "./component/TabNavigator";
+import workoutDetail from "./component/WorkoutDetail";
 
 const Stack = createStackNavigator();
 

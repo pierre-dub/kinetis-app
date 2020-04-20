@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from "./home";
-import Settings from "./settings";
-import Listing from "./listing";
-import AddContent from "./new";
-import Patient from "./patients";
+
+import Home from "./Home";
+import Settings from "./Settings";
+import Listing from "./Listing";
+import AddContent from "./New";
+import Patient from "./Patients";
 
 const Tab = createBottomTabNavigator();
 

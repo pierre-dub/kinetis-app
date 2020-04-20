@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+
 import React from "react";
-import WorkoutDetail from "./workoutDetail";
+import WorkoutDetail from "./WorkoutDetail";
 
 interface Props {
     workout: any,
@@ -22,7 +23,6 @@ export default class WorkoutItem extends React.Component<Props>{
                         </View>
                         <View style={styleListing.description_container}>
                             <Text style={styleListing.description_text}>{workout.description}</Text>
-                            {/*<Text style={styleListing.description_text}>{workout.repetition}</Text>*/}
                         </View>
                         <View style={styleListing.materiel_container}>
                             <Text style={styleListing.materiel_text}>Materiel: {workout.materiel}</Text>
