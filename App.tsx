@@ -4,6 +4,7 @@ import TabNavigator from "./component/tabNavigator";
 
 import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from '@react-navigation/native';
+import {StatusBar, View} from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -18,8 +19,10 @@ function WelcomeStack() {
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <WelcomeStack/>
-        </NavigationContainer>
+        <View style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
+            <NavigationContainer>
+                <WelcomeStack/>
+            </NavigationContainer>
+        </View>
     );
 }
