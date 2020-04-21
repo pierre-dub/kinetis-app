@@ -6,19 +6,75 @@ import Settings from "./Settings";
 import Listing from "./Listing";
 import AddContent from "./New";
 import Patient from "./Patients";
+import {Image, StyleSheet} from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default class TabNavigator extends React.Component{
     render(){
         return (
-            <Tab.Navigator>
-                <Tab.Screen name="Home" component={Home}/>
-                <Tab.Screen name="Listing" component={Listing}/>
-                <Tab.Screen name="New" component={AddContent}/>
-                <Tab.Screen name="Patients" component={Patient}/>
-                <Tab.Screen name="Settings" component={Settings}/>
+            <Tab.Navigator tabBarOptions={{
+                showLabel: true,
+                activeTintColor: '#F8F8F8',
+                inactiveTintColor: '#8A8A8A',
+                style: {
+                    paddingTop: 5,
+                    height: 50,
+                    backgroundColor: '#014a55'}
+            }}>
+                <Tab.Screen name="Home"
+                            component={Home}
+                            options={{
+                                tabBarLabel: 'Home',
+                                tabBarIcon: ({ }) => (
+                                    <Image style={styleListing.image} source={require('../assets/icons/home_white.png')} />
+                                ),
+                            }}
+                />
+                <Tab.Screen name="Listing"
+                            component={Listing}
+                            options={{
+                                tabBarLabel: 'Listing',
+                                tabBarIcon: ({ }) => (
+                                    <Image style={styleListing.image} source={require('../assets/icons/list_white.png')} />
+                                ),
+                            }}
+                />
+                <Tab.Screen name="New"
+                            component={AddContent}
+                            options={{
+                                tabBarLabel: 'New',
+                                tabBarIcon: ({ }) => (
+                                    <Image style={styleListing.image} source={require('../assets/icons/add_white.png')} />
+                                ),
+                            }}
+                />
+                <Tab.Screen name="Patients"
+                            component={Patient}
+                            options={{
+                                tabBarLabel: 'Patients',
+                                tabBarIcon: ({ }) => (
+                                    <Image style={styleListing.image} source={require('../assets/icons/group_white.png')} />
+                                    ),
+                            }}
+                />
+                <Tab.Screen name="Settings"
+                            component={Settings}
+                            options={{
+                                tabBarLabel: 'Settings',
+                                tabBarIcon: ({ }) => (
+                                    <Image style={styleListing.image} source={require('../assets/icons/settings_white.png')} />
+                                ),
+                            }}
+                />
             </Tab.Navigator>
         )
     }
 }
+
+const styleListing = StyleSheet.create({
+    image: {
+        width: 35,
+        height: 35,
+    }
+})
