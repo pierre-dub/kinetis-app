@@ -1,12 +1,31 @@
-import {Text, View} from "react-native";
-import React from "react";
+import * as React from "react";
+import { Provider } from "react-redux";
+import store from "../redux/Store";
+import UserForm from "../redux/NewWorkoutForm";
+import {Alert, Text} from "react-native";
+
+const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center"
+};
+
+interface IUser {
+    firstName: string;
+    lastName: string;
+}
+
 
 export default class New extends React.Component{
     render() {
+        const greetTheUser = (user: IUser) => Alert.alert(`Hi, ${user.firstName} ${user.lastName}!`);
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>New</Text>
-            </View>
+        <Provider store={store}>
+            <UserForm />
+        </Provider>
         )
     }
 }
+
+// <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//     <Text>New</Text>
+// </View>
