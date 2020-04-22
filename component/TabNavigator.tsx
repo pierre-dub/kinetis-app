@@ -14,20 +14,21 @@ export default class TabNavigator extends React.Component{
     render(){
         return (
             <Tab.Navigator tabBarOptions={{
-                showLabel: true,
+                showLabel : true,
                 activeTintColor: '#F8F8F8',
                 inactiveTintColor: '#8A8A8A',
+                keyboardHidesTabBar: true,
                 style: {
-                    paddingTop: 5,
                     height: 50,
-                    backgroundColor: '#014a55'}
+                    backgroundColor: '#014a55',
+                }
             }}>
                 <Tab.Screen name="Home"
                             component={Home}
                             options={{
                                 tabBarLabel: 'Home',
                                 tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/home_white.png')} />
+                                    <Image style={styleListing.image} source={require('../assets/icons/home_white.png')}/>
                                 ),
                             }}
                 />
@@ -36,7 +37,7 @@ export default class TabNavigator extends React.Component{
                             options={{
                                 tabBarLabel: 'Listing',
                                 tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/list_white.png')} />
+                                    <Image style={styleListing.image} source={require('../assets/icons/list_white.png')}/>
                                 ),
                             }}
                 />
@@ -45,7 +46,7 @@ export default class TabNavigator extends React.Component{
                             options={{
                                 tabBarLabel: 'New',
                                 tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/add_white.png')} />
+                                    <Image style={styleListing.image} source={require('../assets/icons/add_white.png')}/>
                                 ),
                             }}
                 />
@@ -54,7 +55,7 @@ export default class TabNavigator extends React.Component{
                             options={{
                                 tabBarLabel: 'Patients',
                                 tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/group_white.png')} />
+                                    <Image style={styleListing.image} source={require('../assets/icons/group_white.png')}/>
                                     ),
                             }}
                 />
@@ -63,7 +64,7 @@ export default class TabNavigator extends React.Component{
                             options={{
                                 tabBarLabel: 'Settings',
                                 tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/settings_white.png')} />
+                                    <Image style={styleListing.image} source={require('../assets/icons/settings_white.png')}/>
                                 ),
                             }}
                 />
@@ -74,7 +75,7 @@ export default class TabNavigator extends React.Component{
 
 const styleListing = StyleSheet.create({
     image: {
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
     }
 })
