@@ -4,6 +4,6 @@ import { reducer as reduxFormReducer } from 'redux-form';
 const reducer = combineReducers({
     form: reduxFormReducer,
 });
-const store = createStore(reducer);
+//const store = createStore(reducer);
 
-export default store;
+export default reducer;

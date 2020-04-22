@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Blank Template (TypeScript)",
-    "slug": "Kinetic",
-    "privacy": "public",
+    "name": "Kiétis",
+    "slug": "kine-app",
+    "privacy": "private",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
@@ -11,9 +11,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "splash": {
-      "image": "./assets/logo_transparent-xhdpi.png",
+      "image": "./src/assets/logo_transparent-xhdpi.png",
       "resizeMode": "contain",
       "backgroundColor": "#014a55"
     },

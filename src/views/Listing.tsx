@@ -1,6 +1,6 @@
 import {SafeAreaView, FlatList} from "react-native";
 import React from "react";
-import WorkoutItem from "./WorkoutItem";
+import WorkoutItem from "../components/WorkoutItem";
 
 const illustration1 = require('../assets/JumpSquat.jpg');
 const illustration2 = require('../assets/MonteeDeGenoux.jpg');

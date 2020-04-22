@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Provider } from "react-redux";
-import store from "../redux/Store";
-import UserForm from "../redux/NewWorkoutForm";
+import store from "../redux/myStore";
+import UserForm from "../components/NewWorkoutForm";
 import {Alert, Text} from "react-native";
 
 const styles = {
