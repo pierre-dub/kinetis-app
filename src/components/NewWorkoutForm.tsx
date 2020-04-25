@@ -1,36 +1,39 @@
 import React from 'react';
 import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
-import { Field, reduxForm } from 'redux-form';
+import {Field, reduxForm, submit} from 'redux-form';
+import {setNewWorkout} from "../db/setNewWorkout";
 
+const onSubmit = (values: any) => {
+    console.log(values);
+    setNewWorkout(values)
+};
+
+// @ts-ignore
+const renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
+    return <TextInput style={styles.textInput}
+                      onChangeText={onChange} {...input} {...rest}
+                      placeholderTextColor="grey"
+    />
+};
+
+// @ts-ignore
+const renderTextArea = ({ input: { onChange, ...input }, ...rest}) => {
+    return <TextInput style={styles.textArea}
+                      multiline={true}
+                      onChangeText={onChange} {...input} {...rest}
+                      placeholderTextColor="grey"
+    />
+};
 
 const myForm = (props: { handleSubmit: any; }) => {
 
     const { handleSubmit } = props;
 
-    const onSubmit = (values: any) => console.log(values);
-
-    // @ts-ignore
-    const renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
-        return <TextInput style={styles.textInput}
-                          onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="grey"
-        />
-    };
-
-    // @ts-ignore
-    const renderTextArea = ({ input: { onChange, ...input }, ...rest}) => {
-        return <TextInput style={styles.textArea}
-                          multiline={true}
-                          onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="grey"
-        />
-    };
-
     return (
         <View style={styles.root}>
             <Text style={styles.subTitles}>Nom de l'exerice</Text>
             <Field
-                name="exerice_name"
+                name="title"
                 props={{
                     placeholder: "Nom de l\'exercice",
                 }}
@@ -54,7 +57,7 @@ const myForm = (props: { handleSubmit: any; }) => {
             />
             <Text style={styles.subTitles}>Matériel</Text>
             <Field
-                name="metriel"
+                name="materiel"
                 props={{
                     placeholder: "Matériel",
                 }}
