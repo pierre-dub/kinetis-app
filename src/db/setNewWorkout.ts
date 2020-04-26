@@ -14,7 +14,8 @@ export async function setNewWorkout(values:any) {
                 'obj': values.obj
             })
         });
-        let json = await JSON.stringify(response);
+        let json = await response.json();
+        console.log(json.message)
         return json;
     } catch (error) {
         console.error(error);

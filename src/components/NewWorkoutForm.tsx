@@ -3,9 +3,8 @@ import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
 
-const onSubmit = (values: any) => {
-    console.log(values);
-    setNewWorkout(values)
+const onSubmit = async (values: any) => {
+    let json = await setNewWorkout(values);
 };
 
 // @ts-ignore
