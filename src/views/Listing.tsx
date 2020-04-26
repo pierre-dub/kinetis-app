@@ -40,6 +40,10 @@ interface Props {
 
 
 export default class Listing extends React.Component<Props>{
+    constructor(props:any) {
+        super(props);
+        refreshing: false
+    }
     state: any = {
         myWorkouts: null
     };
@@ -50,7 +54,7 @@ export default class Listing extends React.Component<Props>{
             .then(res => {
                 this.fetch = null;
                 // @ts-ignore
-                this.setState({myWorkouts : res.data})
+                this.setState({myWorkouts : res.data, refreshing: false})
             })
     }
 
@@ -58,6 +62,17 @@ export default class Listing extends React.Component<Props>{
         if(this.fetch){
             this.fetch.cancel();
         }
+    }
+
+    handleRefresh = () => {
+        this.setState({
+            page: 1,
+            refreshing: true,
+            seed: this.state.seed + 1
+        },
+            () => {
+            this.componentDidMount();
+        })
     }
 
     render() {
@@ -84,6 +99,8 @@ export default class Listing extends React.Component<Props>{
                             <WorkoutItem workout={item} navigate={navigate}/>
                         }
                         keyExtractor={item => item.ID.toString()}
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.handleRefresh}
                     />
                 </SafeAreaView>
             )

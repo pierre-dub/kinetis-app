@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
+import Listing from "../views/Listing";
 
 const onSubmit = async (values: any) => {
     let json = await setNewWorkout(values);
