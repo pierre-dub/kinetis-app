@@ -12,16 +12,16 @@ export default class WorkoutDetail extends React.Component<Props> {
         return (
                 <View style={styleWorkout.main_container}>
                     <View style={styleWorkout.title_container}>
-                        <Text style={styleWorkout.title_text}>{workout.title}</Text>
+                        <Text style={styleWorkout.title_text}>{workout.TITLE}</Text>
                     </View>
-                    <Image style={styleWorkout.image} source={workout.illustration}/>
+                    <Image style={styleWorkout.image} source={workout.ILLUSTRATION}/>
                     <View style={styleWorkout.description_container}>
                         <Text style={styleWorkout.title_section}>Description :</Text>
-                        <Text style={styleWorkout.description_text}>{workout.description}</Text>
+                        <Text style={styleWorkout.description_text}>{workout.DESCRIPTION}</Text>
                         <Text style={styleWorkout.title_section}>Répétition : </Text>
-                        <Text style={styleWorkout.description_text}>{workout.repetition}</Text>
+                        <Text style={styleWorkout.description_text}>{workout.REPETITION}</Text>
                         <Text style={styleWorkout.title_section}>Materiel:</Text>
-                        <Text style={styleWorkout.description_text}>{workout.materiel}</Text>
+                        <Text style={styleWorkout.description_text}>{workout.MATERIEL}</Text>
                     </View>
                 </View>
         )

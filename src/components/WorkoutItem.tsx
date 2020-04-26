@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 import React from "react";
-import WorkoutDetail from "./WorkoutDetail";
+import WorkoutDetail from "../views/WorkoutDetail";
 
 interface Props {
     workout: any,
@@ -16,16 +16,16 @@ export default class WorkoutItem extends React.Component<Props>{
             <TouchableOpacity
                 style={styleListing.main_container}
                 onPress={() => navigate("WorkoutDetail",{workout : workout})}>
-                    <Image style={styleListing.image} source={workout.illustration}/>
+                    <Image style={styleListing.image} source={workout.ILLUSTRATION}/>
                     <View style={styleListing.content_container}>
                         <View style={styleListing.header_container}>
-                            <Text style={styleListing.title_text}>{workout.title}</Text>
+                            <Text style={styleListing.title_text}>{workout.TITLE}</Text>
                         </View>
                         <View style={styleListing.description_container}>
-                            <Text style={styleListing.description_text}>{workout.description}</Text>
+                            <Text style={styleListing.description_text}>{workout.DESCRIPTION}</Text>
                         </View>
                         <View style={styleListing.materiel_container}>
-                            <Text style={styleListing.materiel_text}>Materiel: {workout.materiel}</Text>
+                            <Text style={styleListing.materiel_text}>Materiel: {workout.MATERIEL}</Text>
                         </View>
                     </View>
             </TouchableOpacity>
