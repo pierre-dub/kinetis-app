@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import Connexion from "../views/Connexion";
 import TabNavigator from "../components/TabNavigator";
-import WorkoutDetail from "../components/WorkoutDetail";
+import WorkoutDetail from "../views/WorkoutDetail";
 import Listing from "../views/Listing";
 import New from "../views/New";
 import Patients from "../views/Patients";
