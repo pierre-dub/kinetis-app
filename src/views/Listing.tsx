@@ -11,7 +11,6 @@ interface Props {
 export default class Listing extends React.Component<Props>{
     constructor(props:any) {
         super(props);
-        refreshing: false
     }
     state: any = {
         myWorkouts: null,
@@ -20,12 +19,11 @@ export default class Listing extends React.Component<Props>{
     fetch: any = {}
 
     componentDidMount(): void {
-        console.log("fetch all")
         this.fetch = getMyWorkout()
             .then(res => {
                 this.fetch = null;
                 // @ts-ignore
-                this.setState({myWorkouts : res.data, refreshing: false})
+                this.setState({myWorkouts : this.sortWorkout(res.data), refreshing: false})
             })
     }
 
@@ -33,6 +31,18 @@ export default class Listing extends React.Component<Props>{
         if(this.fetch){
             this.fetch.cancel();
         }
+    }
+
+    sortWorkout = (array:any) => {
+        array = array.sort(function (a:any,b:any){
+            if(a.TITLE[0].toLowerCase() == b.TITLE[0].toLowerCase())
+                return 0;
+            if(a.TITLE[0].toLowerCase() < b.TITLE[0].toLowerCase())
+                return -1;
+            if(a.TITLE[0].toLowerCase() > b.TITLE[0].toLowerCase())
+                return 1;
+        });
+        return array
     }
 
     handleRefresh = () => {
@@ -48,7 +58,7 @@ export default class Listing extends React.Component<Props>{
         await this.setState({searchedTitle: titre})
         if (this.state.searchedTitle.length > 0) {
             getMyWorkoutWithTitle(this.state.searchedTitle).then(res => {
-                this.setState({myWorkouts: res.data, refreshing: false})
+                this.setState({myWorkouts : this.sortWorkout(res.data), refreshing: false})
             })
         } else {
             this.componentDidMount()
@@ -56,7 +66,6 @@ export default class Listing extends React.Component<Props>{
     }
 
     render() {
-        console.log("RENDER")
         const {navigate} =this.props.navigation;
         if(this.state.myWorkouts === null){
             return(
