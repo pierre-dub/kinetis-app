@@ -2,7 +2,7 @@ import {myHeaders, rootEndpoint} from "./settings";
 
 export async function getMyWorkoutWithTitle(title:string) {
     try{
-        const response = await fetch(rootEndpoint + '/users', {
+        const response = await fetch(rootEndpoint + '/workout/find', {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({
