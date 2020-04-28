@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
-import {Field, reduxForm, submit} from 'redux-form';
+import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, Animated} from 'react-native';
+import {Field, reduxForm} from 'redux-form';
+import {checkAuthentication} from "../db/checkAuthentication";
 
 interface Props {
     navigate: any
@@ -9,6 +10,10 @@ interface Props {
 class ConnexionForm extends React.Component<Props>{
     constructor(props:any) {
         super(props);
+    }
+    state:any = {
+        username: "",
+        password: ""
     }
 
 // @ts-ignore
@@ -19,8 +24,24 @@ class ConnexionForm extends React.Component<Props>{
         />
     };
 
-    onSubmit = () => {
-        this.props.navigate('app')
+    onSubmit = async () => {
+        await checkAuthentication(this.state.username, this.state.password).then((status) => {
+            if (status === "200"){
+                this.props.navigate('app')
+            }
+            else{
+                Alert.alert("Authentication failed")
+            }
+        })
+    };
+
+    handleChange = (type:boolean,text:any) => {
+        if (type) {
+            this.setState({username: text})
+        }
+        else {
+            this.setState({password: text})
+        }
     }
 
     render() {
@@ -33,6 +54,7 @@ class ConnexionForm extends React.Component<Props>{
                         placeholder: "login",
                     }}
                     component={this.renderTextInput}
+                    onChange={(text: any) => this.handleChange(true,text)}
                 />
                 <Text style={styles.subTitles}>Mot de passe</Text>
                 <Field
@@ -41,9 +63,10 @@ class ConnexionForm extends React.Component<Props>{
                         placeholder: "Mot de Passe",
                     }}
                     component={this.renderTextInput}
+                    onChange={(text: any) => this.handleChange(false,text)}
                 />
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
-                    <TouchableOpacity onPress={this.onSubmit}>
+                    <TouchableOpacity onPress={(this.onSubmit)}>
                         <View style={styles.button}>
                             <Text style={{color: 'white', fontSize: 20}}>Enregistrer</Text>
                         </View>
