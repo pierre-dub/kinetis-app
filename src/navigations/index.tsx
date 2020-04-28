@@ -1,5 +1,5 @@
-import appNavigator from "./appNavigator";
-import authNavigator from "./authNavigator";
+import AppNavigator from "./AppNavigator";
+import AuthNavigator from "./AuthNavigator";
 import {createAppContainer, createSwitchNavigator} from "react-navigation";
 import * as React from "react";
 import Login from "../views/Login";
@@ -7,8 +7,8 @@ import Login from "../views/Login";
 const rootNavigator = createSwitchNavigator(
     {
         log: Login,
-        auth: authNavigator,
-        app: appNavigator
+        auth: AuthNavigator,
+        app: AppNavigator
     },
     {
         initialRouteName:'log'
