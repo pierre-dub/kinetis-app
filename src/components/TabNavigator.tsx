@@ -59,15 +59,15 @@ export default class TabNavigator extends React.Component{
                                     ),
                             }}
                 />
-                <Tab.Screen name="Settings"
-                            component={Settings}
-                            options={{
-                                tabBarLabel: 'Settings',
-                                tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/settings_white.png')}/>
-                                ),
-                            }}
-                />
+                {/*<Tab.Screen name="Settings"*/}
+                {/*            component={Settings}*/}
+                {/*            options={{*/}
+                {/*                tabBarLabel: 'Settings',*/}
+                {/*                tabBarIcon: ({ }) => (*/}
+                {/*                    <Image style={styleListing.image} source={require('../assets/icons/settings_white.png')}/>*/}
+                {/*                ),*/}
+                {/*            }}*/}
+                {/*/>*/}
             </Tab.Navigator>
         )
     }
