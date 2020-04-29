@@ -4,75 +4,93 @@ import {Field, reduxForm, submit} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
 import Listing from "../views/Listing";
 
-const onSubmit = async (values: any) => {
-    let json = await setNewWorkout(values);
-};
+interface Props {
+    navigate: any
+}
+
+class NewWorkoutForm extends React.Component<Props> {
+    constructor(props: any) {
+        super(props);
+    }
+    state:any = {
+        title: "",
+        description: "",
+        repetition: "",
+        materiel: "",
+    }
+
+    onSubmit = async (values: any) => {
+        let json = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel);
+        this.props.navigate("Listing")
+    };
 
 // @ts-ignore
-const renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
-    return <TextInput style={styles.textInput}
-                      onChangeText={onChange} {...input} {...rest}
-                      placeholderTextColor="#014a55"
-    />
-};
+    renderTextInput = ({input: {onChange, ...input}, ...rest}) => {
+        return <TextInput style={styles.textInput}
+                          onChangeText={onChange} {...input} {...rest}
+                          placeholderTextColor="#014a55"
+        />
+    };
 
 // @ts-ignore
-const renderTextArea = ({ input: { onChange, ...input }, ...rest}) => {
-    return <TextInput style={styles.textArea}
-                      multiline={true}
-                      onChangeText={onChange} {...input} {...rest}
-                      placeholderTextColor="#014a55"
-    />
-};
+    renderTextArea = ({input: {onChange, ...input}, ...rest}) => {
+        return <TextInput style={styles.textArea}
+                          multiline={true}
+                          onChangeText={onChange} {...input} {...rest}
+                          placeholderTextColor="#014a55"
+        />
+    };
 
-const myForm = (props: { handleSubmit: any; }) => {
-
-    const { handleSubmit } = props;
-
-    return (
-        <View style={styles.root}>
-            <Text style={styles.subTitles}>Workout name</Text>
-            <Field
-                name="title"
-                props={{
-                    placeholder: "Workout name",
-                }}
-                component={renderTextInput}
-            />
-            <Text style={styles.subTitles}>Description</Text>
-            <Field
-                name="description"
-                props={{
-                    placeholder: "Description",
-                }}
-                component={renderTextArea}
-            />
-            <Text style={styles.subTitles}>Repetition</Text>
-            <Field
-                name="repetition"
-                props={{
-                    placeholder: "Repetition",
-                }}
-                component={renderTextInput}
-            />
-            <Text style={styles.subTitles}>Equipment</Text>
-            <Field
-                name="materiel"
-                props={{
-                    placeholder: "Equipment",
-                }}
-                component={renderTextInput}
-            />
-            <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
-                <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-                    <View style={styles.button}>
-                        <Text style={{color: 'white', fontSize: 20}}>Enregistrer</Text>
-                    </View>
-                </TouchableOpacity>
+    render(){
+        return (
+            <View style={styles.root}>
+                <Text style={styles.subTitles}>Workout name</Text>
+                <Field
+                    name="title"
+                    props={{
+                        placeholder: "Workout name",
+                    }}
+                    component={this.renderTextInput}
+                    onChange={(text: any) => this.setState({title: text})}
+                />
+                <Text style={styles.subTitles}>Description</Text>
+                <Field
+                    name="description"
+                    props={{
+                        placeholder: "Description",
+                    }}
+                    component={this.renderTextArea}
+                    onChange={(text: any) => this.setState({description: text})}
+                />
+                <Text style={styles.subTitles}>Repetition</Text>
+                <Field
+                    name="repetition"
+                    props={{
+                        placeholder: "Repetition",
+                    }}
+                    component={this.renderTextInput}
+                    onChange={(text: any) => this.setState({repetition: text})}
+                />
+                <Text style={styles.subTitles}>Equipment</Text>
+                <Field
+                    name="materiel"
+                    props={{
+                        placeholder: "Equipment",
+                    }}
+                    component={this.renderTextInput}
+                    onChange={(text: any) => this.setState({materiel: text})}
+                />
+                <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
+                    <TouchableOpacity onPress={(this.onSubmit)}>
+                        <View style={styles.button}>
+                            <Text style={{color: 'white', fontSize: 20}}>Enregistrer</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
-    );
-};
+        );
+    };
+}
 
 const styles = StyleSheet.create({
     root: {
@@ -113,4 +131,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default reduxForm({form: 'test-form'})(myForm);
+// @ts-ignore
+export default reduxForm({form: 'workout-form'})(NewWorkoutForm);
