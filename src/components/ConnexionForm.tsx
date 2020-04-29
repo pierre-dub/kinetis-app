@@ -20,7 +20,7 @@ class ConnexionForm extends React.Component<Props>{
     renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
         return <TextInput style={styles.textInput}
                           onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="grey"
+                          placeholderTextColor="#014a55"
         />
     };
 
@@ -47,20 +47,18 @@ class ConnexionForm extends React.Component<Props>{
     render() {
         return (
             <View style={styles.root}>
-                <Text style={styles.subTitles}>Login</Text>
                 <Field
                     name="login"
                     props={{
-                        placeholder: "login",
+                        placeholder: "Login",
                     }}
                     component={this.renderTextInput}
                     onChange={(text: any) => this.handleChange(true,text)}
                 />
-                <Text style={styles.subTitles}>Mot de passe</Text>
                 <Field
                     name="mdp"
                     props={{
-                        placeholder: "Mot de Passe",
+                        placeholder: "Password",
                     }}
                     component={this.renderTextInput}
                     onChange={(text: any) => this.handleChange(false,text)}
@@ -68,7 +66,14 @@ class ConnexionForm extends React.Component<Props>{
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
                     <TouchableOpacity onPress={(this.onSubmit)}>
                         <View style={styles.button}>
-                            <Text style={{color: 'white', fontSize: 20}}>Enregistrer</Text>
+                            <Text style={{color: 'white', fontSize: 20}}>Log In</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:20}}>
+                    <TouchableOpacity onPress={()=>{Alert.alert("Not implemented yet")}}>
+                        <View style={styles.button}>
+                            <Text style={{color: 'white', fontSize: 20}}>Create New Account</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -81,8 +86,6 @@ class ConnexionForm extends React.Component<Props>{
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        padding: 32,
-        justifyContent: 'center'
     },
     subTitles:{
         fontSize:20,
@@ -94,8 +97,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         borderColor: '#014a55',
         borderWidth: 1,
-        borderRadius: 4,
-        height: 40,
+        borderRadius: 5,
+        width:350,
+        height: 50,
         justifyContent: "center"
     },
     textArea: {
@@ -111,8 +115,8 @@ const styles = StyleSheet.create({
     button:{backgroundColor: '#014a55',
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 2,
-        width: 200,
+        borderRadius: 10,
+        width: 300,
         height: 60,
     }
 });

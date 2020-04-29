@@ -16,7 +16,6 @@ export default function Navigator() {
     return (
         <NavigationContainer>
             <Stack.Navigator headerMode={"none"}>
-                <Stack.Screen name="Connexion" component={Connexion}/>
                 <Stack.Screen name="Home" component={TabNavigator} />
                 <Stack.Screen name="Listing" component={Listing} />
                 <Stack.Screen name="New" component={New} />
