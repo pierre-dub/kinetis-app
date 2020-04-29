@@ -1,4 +1,15 @@
-import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, Button, StyleSheet} from "react-native";
+import {
+    SafeAreaView,
+    FlatList,
+    View,
+    TouchableOpacity,
+    Text,
+    TextInput,
+    Button,
+    StyleSheet,
+    Alert,
+    Image
+} from "react-native";
 import React from "react";
 import WorkoutItem from "../components/WorkoutItem";
 import {getMyWorkout} from "../db/getMyWorkout";
@@ -86,17 +97,24 @@ export default class Listing extends React.Component<Props>{
                         placeholder="Workout name"
                         onChangeText={async (text) => await this.searchWorkout(text)}
                     />
-                <SafeAreaView>
-                    <FlatList
-                        data={this.state.myWorkouts}
-                        renderItem={({ item }) =>
-                            <WorkoutItem workout={item} navigate={navigate}/>
-                        }
-                        keyExtractor={item => item.ID.toString()}
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.handleRefresh}
-                    />
-                </SafeAreaView>
+                    <SafeAreaView>
+                        <FlatList
+                            data={this.state.myWorkouts}
+                            renderItem={({ item }) =>
+                                <WorkoutItem workout={item} navigate={navigate}/>
+                            }
+                            keyExtractor={item => item.ID.toString()}
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.handleRefresh}
+                        />
+                    </SafeAreaView>
+                    <View style={styles.button_container}>
+                        <TouchableOpacity onPress={()=>{Alert.alert("Not implemented yet")}}>
+                            <View style={styles.button}>
+                                <Text style={{color: 'white', fontSize: 35, marginBottom:5}}>+</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
@@ -114,5 +132,19 @@ const styles = StyleSheet.create({
         color: 'white',
         justifyContent: "center",
         backgroundColor:'#014a55'
+    },
+    button_container:{
+        position:'absolute',
+        bottom:40,
+        alignSelf:'flex-end',
+        paddingRight:20
+
+    },
+    button:{backgroundColor: '#014a55',
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 50,
+        width: 60,
+        height: 60,
     }
 })
