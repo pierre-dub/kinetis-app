@@ -109,7 +109,7 @@ export default class Listing extends React.Component<Props>{
                         />
                     </SafeAreaView>
                     <View style={styles.button_container}>
-                        <TouchableOpacity onPress={()=>{Alert.alert("Not implemented yet")}}>
+                        <TouchableOpacity onPress={()=>{navigate("New")}}>
                             <View style={styles.button}>
                                 <Text style={{color: 'white', fontSize: 35, marginBottom:5}}>+</Text>
                             </View>

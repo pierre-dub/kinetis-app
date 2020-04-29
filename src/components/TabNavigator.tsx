@@ -41,15 +41,15 @@ export default class TabNavigator extends React.Component{
                                 ),
                             }}
                 />
-                <Tab.Screen name="New"
-                            component={AddContent}
-                            options={{
-                                tabBarLabel: 'New',
-                                tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/add_white.png')}/>
-                                ),
-                            }}
-                />
+                {/*<Tab.Screen name="New"*/}
+                {/*            component={AddContent}*/}
+                {/*            options={{*/}
+                {/*                tabBarLabel: 'New',*/}
+                {/*                tabBarIcon: ({ }) => (*/}
+                {/*                    <Image style={styleListing.image} source={require('../assets/icons/add_white.png')}/>*/}
+                {/*                ),*/}
+                {/*            }}*/}
+                {/*/>*/}
                 <Tab.Screen name="Patients"
                             component={Patient}
                             options={{
