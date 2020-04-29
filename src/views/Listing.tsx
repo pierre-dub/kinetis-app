@@ -72,7 +72,7 @@ export default class Listing extends React.Component<Props>{
                 <View style={{padding:5, flex:1}}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Nom de l'exercice"
+                        placeholder="Workout name"
                         onChangeText={async (text) => await this.searchWorkout(text)}
                     />
                 </View>
@@ -83,7 +83,7 @@ export default class Listing extends React.Component<Props>{
                 <View style={{padding:5, flex:1}}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Nom de l'exercice"
+                        placeholder="Workout name"
                         onChangeText={async (text) => await this.searchWorkout(text)}
                     />
                 <SafeAreaView>

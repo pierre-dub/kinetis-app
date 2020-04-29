@@ -12,7 +12,7 @@ const onSubmit = async (values: any) => {
 const renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
     return <TextInput style={styles.textInput}
                       onChangeText={onChange} {...input} {...rest}
-                      placeholderTextColor="grey"
+                      placeholderTextColor="#014a55"
     />
 };
 
@@ -21,7 +21,7 @@ const renderTextArea = ({ input: { onChange, ...input }, ...rest}) => {
     return <TextInput style={styles.textArea}
                       multiline={true}
                       onChangeText={onChange} {...input} {...rest}
-                      placeholderTextColor="grey"
+                      placeholderTextColor="#014a55"
     />
 };
 
@@ -31,11 +31,11 @@ const myForm = (props: { handleSubmit: any; }) => {
 
     return (
         <View style={styles.root}>
-            <Text style={styles.subTitles}>Nom de l'exerice</Text>
+            <Text style={styles.subTitles}>Workout name</Text>
             <Field
                 name="title"
                 props={{
-                    placeholder: "Nom de l\'exercice",
+                    placeholder: "Workout name",
                 }}
                 component={renderTextInput}
             />
@@ -47,19 +47,19 @@ const myForm = (props: { handleSubmit: any; }) => {
                 }}
                 component={renderTextArea}
             />
-            <Text style={styles.subTitles}>Répétition</Text>
+            <Text style={styles.subTitles}>Repetition</Text>
             <Field
                 name="repetition"
                 props={{
-                    placeholder: "Répétition",
+                    placeholder: "Repetition",
                 }}
                 component={renderTextInput}
             />
-            <Text style={styles.subTitles}>Matériel</Text>
+            <Text style={styles.subTitles}>Equipment</Text>
             <Field
                 name="materiel"
                 props={{
-                    placeholder: "Matériel",
+                    placeholder: "Equipment",
                 }}
                 component={renderTextInput}
             />
