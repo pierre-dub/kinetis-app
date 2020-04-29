@@ -35,15 +35,6 @@ class ConnexionForm extends React.Component<Props>{
         })
     };
 
-    handleChange = (type:boolean,text:any) => {
-        if (type) {
-            this.setState({username: text})
-        }
-        else {
-            this.setState({password: text})
-        }
-    }
-
     render() {
         return (
             <View style={styles.root}>
@@ -53,7 +44,7 @@ class ConnexionForm extends React.Component<Props>{
                         placeholder: "Login",
                     }}
                     component={this.renderTextInput}
-                    onChange={(text: any) => this.handleChange(true,text)}
+                    onChange={(text: any) => this.setState({username: text})}
                 />
                 <Field
                     name="mdp"
@@ -61,7 +52,7 @@ class ConnexionForm extends React.Component<Props>{
                         placeholder: "Password",
                     }}
                     component={this.renderTextInput}
-                    onChange={(text: any) => this.handleChange(false,text)}
+                    onChange={(text: any) => this.setState({password: text})}
                 />
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
                     <TouchableOpacity onPress={(this.onSubmit)}>

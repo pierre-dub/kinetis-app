@@ -15,9 +15,6 @@ export default class Login extends React.Component<Props>{
     state = {
         tabBarVisible: false,
     }
-    onSubmit = () => {
-        this.props.navigation.navigate("app")
-    };
 
     render() {
         const {navigate} =this.props.navigation;
