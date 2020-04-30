@@ -20,7 +20,9 @@ class SignInForm extends React.Component<Props> {
 
     onSubmit = async () => {
         console.log(this.state)
-        let json = await setNewUser(this.state.login,this.state.password,this.state.email).then(this.props.navigate('App'));
+        let json = await setNewUser(this.state.login,this.state.password,this.state.email)
+            .then(this.props.navigate('SignInNavigator')
+        );
     };
 
 // @ts-ignore

@@ -27,7 +27,7 @@ class ConnexionForm extends React.Component<Props>{
     onSubmit = async () => {
         await checkAuthentication(this.state.username, this.state.password).then((status) => {
             if (status === "200"){
-                this.props.navigate('App')
+                this.props.navigate('SignInNavigator')
             }
             else{
                 Alert.alert("Authentication failed")

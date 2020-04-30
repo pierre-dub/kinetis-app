@@ -1,23 +1,14 @@
 import * as React from 'react';
 import {StatusBar, View} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
-import {rootNavigator} from "./src/navigations";
+import AuthNavigator from "./src/navigations/AuthNavigator";
 
-interface Props {
-    navigate: any
-}
-
-export default class App extends React.Component<Props>{
-    constructor(props: any) {
-        super(props);
-    }
-
+export default class App extends React.Component{
     render(){
-        const Navigator = rootNavigator;
         return (
             <View style={{flex: 1, marginTop: StatusBar.currentHeight}}>
                 <NavigationContainer>
-                    <Navigator/>
+                    <AuthNavigator/>
                 </NavigationContainer>
             </View>
         );
