@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     root_container:{
         flex: 1,
         alignItems: 'center',
-        flexDirection:"column"
+        flexDirection:"column",
+        backgroundColor:"ghostwhite"
     },
     logo: {
         alignItems: 'center',

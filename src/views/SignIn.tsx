@@ -15,7 +15,7 @@ export default class SignIn extends React.Component<Props>{
     render() {
         const {navigate} =this.props.navigation;
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor:"ghostwhite"}}>
                 <Provider store={store}>
                     <SignInForm navigate={navigate}/>
                 </Provider>
