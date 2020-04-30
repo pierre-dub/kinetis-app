@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
-import Listing from "../views/Listing";
+import WorkoutListing from "../views/WorkoutListing";
 
 interface Props {
     navigate: any
@@ -21,7 +21,7 @@ class NewWorkoutForm extends React.Component<Props> {
 
     onSubmit = async (values: any) => {
         let json = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel);
-        this.props.navigate("Listing")
+        this.props.navigate("WorkoutListing")
     };
 
 // @ts-ignore

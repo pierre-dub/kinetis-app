@@ -19,7 +19,7 @@ interface Props {
     navigation: any,
 }
 
-export default class Listing extends React.Component<Props>{
+export default class WorkoutListing extends React.Component<Props>{
     constructor(props:any) {
         super(props);
     }

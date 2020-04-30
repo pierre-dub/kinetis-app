@@ -2,8 +2,8 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from "../views/Home";
-import Listing from "../views/Listing";
-import Patient from "../views/Patients";
+import WorkoutListing from "../views/WorkoutListing";
+import Patient from "../views/PatientListing";
 import {Image, StyleSheet} from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -30,9 +30,9 @@ export const tabNavigator = () => {
                             }}
                 />
                 <Tab.Screen name="Listing"
-                            component={Listing}
+                            component={WorkoutListing}
                             options={{
-                                tabBarLabel: 'Listing',
+                                tabBarLabel: 'WorkoutListing',
                                 tabBarIcon: ({ }) => (
                                     <Image style={styleListing.image} source={require('../assets/icons/list_white.png')}/>
                                 ),
