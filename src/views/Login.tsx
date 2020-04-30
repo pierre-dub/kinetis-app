@@ -12,6 +12,10 @@ interface Props {
 }
 
 export default class Login extends React.Component<Props>{
+    constructor(props:any) {
+        super(props);
+    }
+
     state = {
         tabBarVisible: false,
     }

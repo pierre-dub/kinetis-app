@@ -8,6 +8,9 @@ interface Props {
 }
 
 export default class New extends React.Component<Props>{
+    constructor(props:any) {
+        super(props);
+    }
     render() {
         const {navigate} =this.props.navigation;
         return (

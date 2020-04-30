@@ -6,6 +6,9 @@ interface Props {
 }
 
 export default class WorkoutDetail extends React.Component<Props> {
+    constructor(props:any) {
+        super(props);
+    }
     render() {
         // @ts-ignore
         const {workout} = this.props.route.params;

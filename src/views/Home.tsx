@@ -3,6 +3,10 @@ import React from "react";
 const logo = require('../assets/logo.png');
 
 export default class Home extends React.Component{
+    constructor(props:any) {
+        super(props);
+    }
+
     render() {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
