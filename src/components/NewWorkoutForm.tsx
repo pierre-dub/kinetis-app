@@ -83,7 +83,7 @@ class NewWorkoutForm extends React.Component<Props> {
                 <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
                     <TouchableOpacity onPress={(this.onSubmit)}>
                         <View style={styles.button}>
-                            <Text style={{color: 'white', fontSize: 20}}>Enregistrer</Text>
+                            <Text style={{color: 'white', fontSize: 20}}>Save</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

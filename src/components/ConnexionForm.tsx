@@ -27,7 +27,7 @@ class ConnexionForm extends React.Component<Props>{
     onSubmit = async () => {
         await checkAuthentication(this.state.username, this.state.password).then((status) => {
             if (status === "200"){
-                this.props.navigate('app')
+                this.props.navigate('App')
             }
             else{
                 Alert.alert("Authentication failed")
@@ -62,7 +62,7 @@ class ConnexionForm extends React.Component<Props>{
                     </TouchableOpacity>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:20}}>
-                    <TouchableOpacity onPress={()=>{Alert.alert("Not implemented yet")}}>
+                    <TouchableOpacity onPress={()=>{this.props.navigate('SignIn')}}>
                         <View style={styles.button}>
                             <Text style={{color: 'white', fontSize: 20}}>Create New Account</Text>
                         </View>
