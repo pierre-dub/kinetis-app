@@ -12,7 +12,7 @@ class ConnexionForm extends React.Component<Props>{
         super(props);
     }
     state:any = {
-        username: "",
+        email: "",
         password: ""
     }
 
@@ -25,7 +25,7 @@ class ConnexionForm extends React.Component<Props>{
     };
 
     onSubmit = async () => {
-        await checkAuthentication(this.state.username, this.state.password).then((status) => {
+        await checkAuthentication(this.state.email, this.state.password).then((status) => {
             if (status === "200"){
                 this.props.navigate('SignInNavigator')
             }
@@ -39,12 +39,12 @@ class ConnexionForm extends React.Component<Props>{
         return (
             <View style={styles.root}>
                 <Field
-                    name="login"
+                    name="email"
                     props={{
-                        placeholder: "Login",
+                        placeholder: "Email",
                     }}
                     component={this.renderTextInput}
-                    onChange={(text: any) => this.setState({username: text})}
+                    onChange={(text: any) => this.setState({email: text})}
                 />
                 <Field
                     name="mdp"

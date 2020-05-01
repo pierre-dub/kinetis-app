@@ -1,12 +1,12 @@
 import {myHeaders, rootEndpoint} from "./settings";
 
-export async function checkAuthentication(username:any, password:any) {
+export async function checkAuthentication(email:any, password:any) {
     try{
         const response = await fetch(rootEndpoint + '/user', {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({
-                'username': username,
+                'email': email,
                 'password': password
             })
         })
