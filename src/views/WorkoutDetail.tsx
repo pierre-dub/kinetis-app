@@ -37,7 +37,7 @@ const styleWorkout = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor:"#C8C8C8"
+        backgroundColor:"ghostwhite"
     },
     title_container:{
         flex:1,

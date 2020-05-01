@@ -39,7 +39,7 @@ class SignInForm extends React.Component<Props> {
 
     renderCheckBox = () => {
         return <CheckBox
-            containerStyle={{backgroundColor:'white',borderColor:'#014a55'}}
+            containerStyle={{backgroundColor:'ghostwhite',borderColor:'#014a55'}}
             title='Are you kiné ?'
             checked={this.state.kine}
             onPress={() => this.setState({kine: !this.state.kine})}

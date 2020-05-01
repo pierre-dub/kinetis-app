@@ -80,7 +80,7 @@ export default class WorkoutListing extends React.Component<Props>{
         const {navigate} =this.props.navigation;
         if(this.state.myWorkouts === null){
             return(
-                <View style={{padding:5, flex:1}}>
+                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite'}}>
                     <TextInput
                         style={styles.input}
                         placeholder="Workout name"
@@ -91,7 +91,7 @@ export default class WorkoutListing extends React.Component<Props>{
         }
         else{
             return(
-                <View style={{padding:5, flex:1}}>
+                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite'}}>
                     <TextInput
                         style={styles.input}
                         placeholder="Workout name"
