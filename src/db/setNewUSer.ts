@@ -1,15 +1,17 @@
 import {rootEndpoint, myHeaders} from "./settings";
 
-export async function setNewUser(username:any,password:any,email:any) {
+export async function setNewUser(surname:any,name:any,password:any,email:any,kine:any) {
     try {
         let response = await fetch(rootEndpoint+'/user/new', {
             method: 'POST',
             headers: myHeaders
             ,
             body: JSON.stringify({
-                'username': username,
+                'surname': surname,
+                'name': name,
                 'password': password,
                 'email': email,
+                'kine': kine
             })
         });
         let json = await response.json();

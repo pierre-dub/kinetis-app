@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewUser} from "../db/setNewUSer";
+import {CheckBox} from "react-native-elements";
 
 interface Props {
     navigate: any
@@ -12,15 +13,18 @@ class SignInForm extends React.Component<Props> {
         super(props);
     }
     state:any = {
-        login: "",
+        surname: "",
+        name: "",
         password: "",
         passwordConfirmation: "",
         email: "",
+        kine: false,
+
     }
 
     onSubmit = async () => {
         console.log(this.state)
-        let json = await setNewUser(this.state.login,this.state.password,this.state.email)
+            let json = await setNewUser(this.state.surname,this.state.name,this.state.password,this.state.email,this.state.kine)
             .then(this.props.navigate('SignInNavigator')
         );
     };
@@ -33,18 +37,36 @@ class SignInForm extends React.Component<Props> {
             />
     };
 
+    renderCheckBox = () => {
+        return <CheckBox
+            containerStyle={{backgroundColor:'white',borderColor:'#014a55'}}
+            title='Are you kiné ?'
+            checked={this.state.kine}
+            onPress={() => this.setState({kine: !this.state.kine})}
+        />
+    };
+
     render(){
         return (
             <View style={styles.root}>
-            <Text style={styles.subTitles}>Username</Text>
+            <Text style={styles.subTitles}>Name</Text>
             <Field
-            name="username"
+            name="name"
             props={{
-                placeholder: "username",
+                placeholder: "name",
             }}
             component={this.renderTextInput}
-            onChange={(text: any) => this.setState({login: text})}
+            onChange={(text: any) => this.setState({name: text})}
             />
+                <Text style={styles.subTitles}>Surname</Text>
+                <Field
+                    name="surname"
+                    props={{
+                        placeholder: "surname",
+                    }}
+                    component={this.renderTextInput}
+                    onChange={(text: any) => this.setState({surname: text})}
+                />
             <Text style={styles.subTitles}>Password</Text>
             <Field
             name="password"
@@ -72,6 +94,13 @@ class SignInForm extends React.Component<Props> {
             component={this.renderTextInput}
             onChange={(text: any) => this.setState({email: text})}
             />
+            <View style={{paddingTop:20}}>
+                <Field
+                    name="kine"
+                    component={this.renderCheckBox}
+                    onChange={(check: any) => this.setState({kine: check})}
+                />
+            </View>
             <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
                 <TouchableOpacity onPress={(this.onSubmit)}>
                     <View style={styles.button}>
