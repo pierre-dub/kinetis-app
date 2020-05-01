@@ -3,6 +3,8 @@ import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
 import WorkoutListing from "../views/WorkoutListing";
+import PicturePicker from "./PicturePicker";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 interface Props {
     navigate: any
@@ -17,6 +19,7 @@ class NewWorkoutForm extends React.Component<Props> {
         description: "",
         repetition: "",
         materiel: "",
+        photo: null,
     }
 
     onSubmit = async (values: any) => {
@@ -43,51 +46,54 @@ class NewWorkoutForm extends React.Component<Props> {
 
     render(){
         return (
-            <View style={styles.root}>
-                <Text style={styles.subTitles}>Workout name</Text>
-                <Field
-                    name="title"
-                    props={{
-                        placeholder: "Workout name",
-                    }}
-                    component={this.renderTextInput}
-                    onChange={(text: any) => this.setState({title: text})}
-                />
-                <Text style={styles.subTitles}>Description</Text>
-                <Field
-                    name="description"
-                    props={{
-                        placeholder: "Description",
-                    }}
-                    component={this.renderTextArea}
-                    onChange={(text: any) => this.setState({description: text})}
-                />
-                <Text style={styles.subTitles}>Repetition</Text>
-                <Field
-                    name="repetition"
-                    props={{
-                        placeholder: "Repetition",
-                    }}
-                    component={this.renderTextInput}
-                    onChange={(text: any) => this.setState({repetition: text})}
-                />
-                <Text style={styles.subTitles}>Equipment</Text>
-                <Field
-                    name="materiel"
-                    props={{
-                        placeholder: "Equipment",
-                    }}
-                    component={this.renderTextInput}
-                    onChange={(text: any) => this.setState({materiel: text})}
-                />
-                <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
-                    <TouchableOpacity onPress={(this.onSubmit)}>
-                        <View style={styles.button}>
-                            <Text style={{color: 'white', fontSize: 20}}>Save</Text>
-                        </View>
-                    </TouchableOpacity>
+            <KeyboardAwareScrollView>
+                <View style={styles.root}>
+                    <PicturePicker/>
+                    <Text style={styles.subTitles}>Workout name</Text>
+                    <Field
+                        name="title"
+                        props={{
+                            placeholder: "Workout name",
+                        }}
+                        component={this.renderTextInput}
+                        onChange={(text: any) => this.setState({title: text})}
+                    />
+                    <Text style={styles.subTitles}>Description</Text>
+                    <Field
+                        name="description"
+                        props={{
+                            placeholder: "Description",
+                        }}
+                        component={this.renderTextArea}
+                        onChange={(text: any) => this.setState({description: text})}
+                    />
+                    <Text style={styles.subTitles}>Repetition</Text>
+                    <Field
+                        name="repetition"
+                        props={{
+                            placeholder: "Repetition",
+                        }}
+                        component={this.renderTextInput}
+                        onChange={(text: any) => this.setState({repetition: text})}
+                    />
+                    <Text style={styles.subTitles}>Equipment</Text>
+                    <Field
+                        name="materiel"
+                        props={{
+                            placeholder: "Equipment",
+                        }}
+                        component={this.renderTextInput}
+                        onChange={(text: any) => this.setState({materiel: text})}
+                    />
+                    <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
+                        <TouchableOpacity onPress={(this.onSubmit)}>
+                            <View style={styles.button}>
+                                <Text style={{color: 'white', fontSize: 20}}>Save</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </KeyboardAwareScrollView>
         );
     };
 }
@@ -100,7 +106,8 @@ const styles = StyleSheet.create({
     },
     subTitles:{
         fontSize:20,
-        color: '#014a55'
+        color: '#014a55',
+        marginTop:40,
     },
     textInput: {
         fontSize: 15,

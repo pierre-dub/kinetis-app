@@ -3,6 +3,7 @@ import React from "react";
 import SignInForm from "../components/SignInForm";
 import {Provider} from "react-redux";
 import store from "../redux/myStore";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 interface Props {
     navigation: any
@@ -15,11 +16,14 @@ export default class SignIn extends React.Component<Props>{
     render() {
         const {navigate} =this.props.navigation;
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor:"ghostwhite"}}>
-                <Provider store={store}>
-                    <SignInForm navigate={navigate}/>
-                </Provider>
-            </View>
+            <KeyboardAwareScrollView
+                style ={{backgroundColor:"ghostwhite"}}>
+                <View style={{flex: 1, marginTop:80,justifyContent: 'center', alignItems: 'center'}}>
+                    <Provider store={store}>
+                        <SignInForm navigate={navigate}/>
+                    </Provider>
+                </View>
+            </KeyboardAwareScrollView>
         )
     }
 }

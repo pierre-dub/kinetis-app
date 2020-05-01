@@ -15,7 +15,7 @@
     "splash": {
       "image": "./src/assets/Kinelogo_slash.png",
       "resizeMode": "contain",
-      "backgroundColor": "ghostwhite"
+      "backgroundColor": "#f8f8ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -28,6 +28,7 @@
     },
     "androidStatusBar":{
       "backgroundColor": "#014a55"
-    }
+    },
+
   }
 }

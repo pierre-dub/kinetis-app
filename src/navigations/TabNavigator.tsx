@@ -38,15 +38,15 @@ export const tabNavigator = () => {
                                 ),
                             }}
                 />
-                <Tab.Screen name="Patients"
-                            component={Patient}
-                            options={{
-                                tabBarLabel: 'Patients',
-                                tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/group_white.png')}/>
-                                    ),
-                            }}
-                />
+                {/*<Tab.Screen name="Patients"*/}
+                {/*            component={Patient}*/}
+                {/*            options={{*/}
+                {/*                tabBarLabel: 'Patients',*/}
+                {/*                tabBarIcon: ({ }) => (*/}
+                {/*                    <Image style={styleListing.image} source={require('../assets/icons/group_white.png')}/>*/}
+                {/*                    ),*/}
+                {/*            }}*/}
+                {/*/>*/}
 
             </Tab.Navigator>
         )

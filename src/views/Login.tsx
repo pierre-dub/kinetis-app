@@ -3,7 +3,7 @@ import ConnexionForm from "../components/ConnexionForm";
 import {Provider} from "react-redux";
 import store from "../redux/myStore";
 import {Image, StyleSheet, View} from "react-native";
-// const logo = require('../assets/logo.png');
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const title = require('../assets/Kinelogo.png');
 
 
@@ -23,19 +23,19 @@ export default class Login extends React.Component<Props>{
     render() {
         const {navigate} =this.props.navigation;
         return (
-            <View style={styles.root_container}>
-                {/*<View style={{flex: 2,  justifyContent:"center"}}>*/}
-                {/*    <Image source={logo} style={styles.logo}/>*/}
-                {/*</View>*/}
-                <View style={{flex: 1,marginTop:180,  justifyContent:"center"}}>
-                  <Image source={title} style={styles.title}/>
+            <KeyboardAwareScrollView
+                style={{backgroundColor:"ghostwhite"}}>
+                <View style={styles.root_container}>
+                    <View style={{flex: 1,marginTop:40,  justifyContent:"center"}}>
+                      <Image source={title} style={styles.title}/>
+                    </View>
+                    <View style={{flex: 3,  marginTop:50,justifyContent:"flex-end"}}>
+                        <Provider store={store}>
+                                <ConnexionForm navigate={navigate}/>
+                        </Provider>
+                    </View>
                 </View>
-                <View style={{flex: 3,  marginTop:50,justifyContent:"flex-end"}}>
-                    <Provider store={store}>
-                            <ConnexionForm navigate={navigate}/>
-                    </Provider>
-                </View>
-            </View>
+            </KeyboardAwareScrollView>
         )
     }
 }
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         flexDirection:"column",
-        backgroundColor:"ghostwhite"
     },
     logo: {
         alignItems: 'center',
