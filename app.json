@@ -13,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "splash": {
-      "image": "./src/assets/Kinelogo.png",
+      "image": "./src/assets/Kinelogo_slash.png",
       "resizeMode": "contain",
       "backgroundColor": "ghostwhite"
     },
