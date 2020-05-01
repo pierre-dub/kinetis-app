@@ -2,7 +2,7 @@ import {rootEndpoint, myHeaders} from "./settings";
 
 export async function setNewUser(username:any,password:any,email:any) {
     try {
-        let response = await fetch(rootEndpoint+'/login/new', {
+        let response = await fetch(rootEndpoint+'/user/new', {
             method: 'POST',
             headers: myHeaders
             ,
