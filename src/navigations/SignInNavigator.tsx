@@ -22,6 +22,7 @@ export default class SignInNavigator extends Component{
                 <Stack.Screen name="New" component={New}/>
                 <Stack.Screen name="Patients" component={PatientListing}/>
                 <Stack.Screen name="Settings" component={Settings}/>
+                <Stack.Screen name="WorkoutListing" component={WorkoutListing}/>
                 <Stack.Screen name="WorkoutDetail" component={WorkoutDetail}/>
             </Stack.Navigator>
         );
