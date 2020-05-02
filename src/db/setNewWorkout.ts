@@ -1,6 +1,6 @@
 import {rootEndpoint, myHeaders} from "./settings";
 
-export async function setNewWorkout(title:any,description:any,repetition:any,materiel:any) {
+export async function setNewWorkout(title:any,description:any,repetition:any,materiel:any,image:any) {
     try {
         let response = await fetch(rootEndpoint+'/workout', {
             method: 'POST',
@@ -11,12 +11,12 @@ export async function setNewWorkout(title:any,description:any,repetition:any,mat
                 'description': description,
                 'materiel': materiel,
                 'repetition': repetition,
-                'obj': ""
+                'obj': "",
+                'image': image,
             })
         });
         let json = await response.json();
-        console.log(json.message)
-        return json;
+        return json.data;
     } catch (error) {
         console.error(error);
     }

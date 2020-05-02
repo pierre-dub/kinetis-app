@@ -27,8 +27,8 @@ class NewWorkoutForm extends React.Component<Props> {
         this.setState({ image: imagePicked });
     }
 
-    onSubmit = async (values: any) => {
-        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel)
+    onSubmit = async () => {
+        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
         await uploadImage(this.state.image, idWorkout)
         this.props.navigate("WorkoutListing")
     };

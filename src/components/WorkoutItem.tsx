@@ -16,7 +16,7 @@ export default class WorkoutItem extends React.Component<Props>{
             <TouchableOpacity
                 style={styleListing.main_container}
                 onPress={() => navigate("WorkoutDetail",{workout : workout})}>
-                    <Image style={styleListing.image} source={workout.ILLUSTRATION}/>
+                    <Image style={styleListing.image} source={{uri: `data:image/gif;base64,${workout.IMAGE}`}} />
                     <View style={styleListing.content_container}>
                         <View style={styleListing.header_container}>
                             <Text style={styleListing.title_text}>{workout.TITLE}</Text>

@@ -17,7 +17,7 @@ export default class WorkoutDetail extends React.Component<Props> {
                     <View style={styleWorkout.title_container}>
                         <Text style={styleWorkout.title_text}>{workout.TITLE}</Text>
                     </View>
-                    <Image style={styleWorkout.image} source={workout.ILLUSTRATION}/>
+                    <Image style={styleWorkout.image} source={{uri: `data:image/gif;base64,${workout.IMAGE}`}} />
                     <View style={styleWorkout.description_container}>
                         <Text style={styleWorkout.title_section}>Description :</Text>
                         <Text style={styleWorkout.description_text}>{workout.DESCRIPTION}</Text>
