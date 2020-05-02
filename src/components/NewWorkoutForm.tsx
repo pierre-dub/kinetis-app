@@ -5,6 +5,7 @@ import {setNewWorkout} from "../db/setNewWorkout";
 import WorkoutListing from "../views/WorkoutListing";
 import PicturePicker from "./PicturePicker";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {uploadImage} from "../db/saveImage";
 
 interface Props {
     navigate: any
@@ -19,11 +20,16 @@ class NewWorkoutForm extends React.Component<Props> {
         description: "",
         repetition: "",
         materiel: "",
-        photo: null,
+        image: null,
+    }
+
+    onPictureChange = (imagePicked:any) => {
+        this.setState({ image: imagePicked });
     }
 
     onSubmit = async (values: any) => {
-        let json = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel);
+        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel)
+        await uploadImage(this.state.image, idWorkout)
         this.props.navigate("WorkoutListing")
     };
 
@@ -48,7 +54,7 @@ class NewWorkoutForm extends React.Component<Props> {
         return (
             <KeyboardAwareScrollView>
                 <View style={styles.root}>
-                    <PicturePicker/>
+                    <PicturePicker image={this.state.image} onPictureChange={this.onPictureChange}/>
                     <Text style={styles.subTitles}>Workout name</Text>
                     <Field
                         name="title"

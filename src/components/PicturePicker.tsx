@@ -3,7 +3,11 @@ import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-nati
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
-export default class PicturePicker extends React.Component {
+interface Props {
+    image:any
+    onPictureChange:any
+}
+export default class PicturePicker extends React.Component<Props> {
     state = {
         image: null,
         imageIsSelected: false,
@@ -14,7 +18,7 @@ export default class PicturePicker extends React.Component {
         if(this.state.imageIsSelected){
             return(
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    {image && <Image source={{ uri: image }} style={{ width: 500, height: 300,resizeMode:"contain" }} />}
+                    {image && <Image source={{uri: image }} style={{ width: 500, height: 300,resizeMode:"contain" }} />}
                 </View>
             )
         } else {
@@ -45,16 +49,17 @@ export default class PicturePicker extends React.Component {
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
+                base64:true,
                 allowsEditing: true,
                 aspect: [4, 3],
                 quality: 1,
             });
             if (!result.cancelled) {
+                this.props.onPictureChange(result)
                 this.setState({ imageIsSelected: true, image: result.uri });
             }
-            console.log(result);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 }
