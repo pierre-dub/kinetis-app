@@ -14,17 +14,29 @@ export default class WorkoutDetail extends React.Component<Props> {
         const {workout} = this.props.route.params;
         return (
                 <View style={styleWorkout.main_container}>
+                    <Image style={styleWorkout.image} source={{uri: `data:image/gif;base64,${workout.IMAGE}`}}/>
                     <View style={styleWorkout.title_container}>
                         <Text style={styleWorkout.title_text}>{workout.TITLE}</Text>
                     </View>
-                    <Image style={styleWorkout.image} source={{uri: `data:image/gif;base64,${workout.IMAGE}`}} />
                     <View style={styleWorkout.description_container}>
-                        <Text style={styleWorkout.title_section}>Description :</Text>
-                        <Text style={styleWorkout.description_text}>{workout.DESCRIPTION}</Text>
-                        <Text style={styleWorkout.title_section}>Répétition : </Text>
-                        <Text style={styleWorkout.description_text}>{workout.REPETITION}</Text>
-                        <Text style={styleWorkout.title_section}>Materiel:</Text>
-                        <Text style={styleWorkout.description_text}>{workout.MATERIEL}</Text>
+                        <View style={styleWorkout.subTitle_container}>
+                            <Text style={styleWorkout.title_section}> Description </Text>
+                        </View>
+                        <View style={styleWorkout.content_container}>
+                            <Text style={styleWorkout.description_text}>{workout.DESCRIPTION}</Text>
+                        </View>
+                        <View style={styleWorkout.subTitle_container}>
+                            <Text style={styleWorkout.title_section}> Reps </Text>
+                        </View>
+                        <View style={styleWorkout.content_container}>
+                            <Text style={styleWorkout.description_text}>{workout.REPETITION}</Text>
+                        </View>
+                        <View style={styleWorkout.subTitle_container}>
+                            <Text style={styleWorkout.title_section}> Equipment </Text>
+                        </View>
+                        <View style={styleWorkout.content_container}>
+                            <Text style={styleWorkout.description_text}>{workout.MATERIEL}</Text>
+                        </View>
                     </View>
                 </View>
         )
@@ -34,38 +46,52 @@ export default class WorkoutDetail extends React.Component<Props> {
 const styleWorkout = StyleSheet.create({
     main_container: {
         flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor:"ghostwhite"
-    },
-    title_container:{
-        flex:1,
+        backgroundColor:"ghostwhite",
     },
     image: {
-        width: 160,
-        height: 240,
+        flex:4,
+        resizeMode:"cover",
         margin: 5,
         backgroundColor: 'gray'
     },
+    description_container: {
+        paddingTop:15,
+        flex: 6,
+    },
+    title_container:{
+        flex:1,
+        justifyContent:"center",
+        paddingLeft:10,
+        backgroundColor:"#014a55"
+    },
     title_text: {
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 25,
+        color:"#f8f8ff",
         flexWrap: 'wrap',
-        paddingRight: 5
+        paddingRight: 5,
+        justifyContent:"center",
     },
     title_section:{
-        fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 15,
         flexWrap: 'wrap',
-        paddingTop: 10,
-        color: "#014a55"
-    },
-    description_container: {
-        flex: 7,
+        color: "white",
+        margin:7,
     },
     description_text: {
-        fontSize: 20,
-        paddingLeft: 10
+        fontSize: 18,
+        paddingHorizontal: 40,
     },
+    subTitle_container:{
+        alignSelf:"flex-start",
+        justifyContent:"center",
+        backgroundColor:"#014a55",
+        borderRadius:20,
+        marginLeft:10,
+        marginBottom:10,
+        marginTop:10
+    },
+    content_container:{
+        marginBottom:0
+    }
 })
