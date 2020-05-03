@@ -1,15 +1,4 @@
-import {
-    SafeAreaView,
-    FlatList,
-    View,
-    TouchableOpacity,
-    Text,
-    TextInput,
-    Button,
-    StyleSheet,
-    Alert,
-    Image
-} from "react-native";
+import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet,} from "react-native";
 import React from "react";
 import WorkoutItem from "../components/WorkoutItem";
 import {getMyWorkout} from "../db/getMyWorkout";
@@ -91,7 +80,7 @@ export default class WorkoutListing extends React.Component<Props>{
         }
         else{
             return(
-                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite'}}>
+                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite',paddingBottom:50}}>
                     <TextInput
                         style={styles.input}
                         placeholder="Workout name"

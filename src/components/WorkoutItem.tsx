@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 import React from "react";
 import WorkoutDetail from "../views/WorkoutDetail";
+import EquipmentItem from "./EquipmentItem";
 
 interface Props {
     workout: any,
@@ -21,12 +22,13 @@ export default class WorkoutItem extends React.Component<Props>{
                         <View style={styleListing.header_container}>
                             <Text style={styleListing.title_text}>{workout.TITLE}</Text>
                         </View>
-                        <View style={styleListing.description_container}>
-                            <Text style={styleListing.description_text}>{workout.DESCRIPTION}</Text>
-                        </View>
-                        <View style={styleListing.materiel_container}>
-                            <Text style={styleListing.materiel_text}>Materiel: {workout.MATERIEL}</Text>
-                        </View>
+                            <View style={styleListing.repetition_container}>
+                                <Text>
+                                    <Text style={styleListing.subSectionTitle}>Reps:</Text>
+                                    <Text style={styleListing.materiel_text}> {workout.REPETITION}</Text>
+                                </Text>
+                            </View>
+                        <EquipmentItem workout={workout}/>
                     </View>
             </TouchableOpacity>
         );
@@ -35,42 +37,47 @@ export default class WorkoutItem extends React.Component<Props>{
 
 const styleListing = StyleSheet.create({
     main_container: {
-        height: 190,
+        height: 200,
         flexDirection: "row",
+        borderBottomWidth:1
     },
     image: {
-        width: 120,
-        height: 180,
+        flex:4,
+        resizeMode:"cover",
         margin: 5,
         backgroundColor: 'gray'
     },
     content_container: {
-        flex: 1,
-        margin: 5
+        flex: 5,
+        margin: 5,
+        flexDirection: "column"
     },
     header_container: {
-        flex: 3,
-        flexDirection: 'row'
+        flex: 2,
     },
     title_text: {
         fontWeight: 'bold',
         fontSize: 20,
-        flex: 1,
         flexWrap: 'wrap',
         paddingRight: 5
     },
-    description_container: {
-        flex: 7
+    subSectionTitle: {
+        fontWeight: "bold",
+        color:"#014a55",
+    },
+    repetition_container: {
+        flex: 3,
+        justifyContent:'flex-start'
     },
     description_text: {
-        fontStyle: 'italic',
-        color: '#666666'
+        fontSize:15,
+        textAlign: "center"
     },
     materiel_container: {
         flex: 1
     },
     materiel_text: {
-        textAlign: 'right',
+        textAlign: 'left',
         fontSize: 14
     }
 })
