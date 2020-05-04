@@ -5,7 +5,8 @@ import {setNewUser} from "../db/setNewUSer";
 import {CheckBox} from "react-native-elements";
 
 interface Props {
-    navigate: any
+    navigate: any,
+    logged:any
 }
 
 class SignInForm extends React.Component<Props> {
@@ -23,10 +24,12 @@ class SignInForm extends React.Component<Props> {
     }
 
     onSubmit = async () => {
+        const {logged} = this.props;
         console.log(this.state)
             let json = await setNewUser(this.state.surname,this.state.name,this.state.password,this.state.email,this.state.kine)
-            .then(this.props.navigate('SignInNavigator')
-        );
+            .then(
+                logged(true)
+            );
     };
 
 // @ts-ignore

@@ -2,24 +2,48 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 const title = require('../assets/Kinelogo.png');
 
-export default class Home extends React.Component{
+interface Props {
+    navigation: any
+    logged: any
+}
+
+export default class Home extends React.Component<Props>{
     constructor(props:any) {
         super(props);
+    }
+
+    onSubmit = () => {
+        const {logged} = this.props;
+        logged(false)
     }
 
     render() {
         return (
             <View style={{flex: 1, alignItems: 'center',justifyContent:'center',backgroundColor:"ghostwhite"}}>
-                <Image source={title} style={stylesConnexion.title}/>
+                <Image source={title} style={stylesConnexion.image}/>
+            <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
+                <TouchableOpacity onPress={(this.onSubmit)}>
+                    <View style={stylesConnexion.button}>
+                        <Text style={{color: 'white', fontSize: 20}}>Log Out</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
             </View>
         )
     }
 }
 
 const stylesConnexion = StyleSheet.create({
-    title: {
+    image: {
         resizeMode: "contain",
         width: 350,
         height: 400,
+    },
+    button:{backgroundColor: '#014a55',
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 2,
+        width: 200,
+        height: 60,
     }
 });

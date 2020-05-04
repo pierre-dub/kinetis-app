@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, Animated} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {checkAuthentication} from "../db/checkAuthentication";
 
 interface Props {
-    navigate: any
+    navigate: any,
+    logged:any
 }
 
 class ConnexionForm extends React.Component<Props>{
@@ -25,9 +26,10 @@ class ConnexionForm extends React.Component<Props>{
     };
 
     onSubmit = async () => {
+        const {logged} = this.props;
         await checkAuthentication(this.state.email, this.state.password).then((status) => {
             if (status === "200"){
-                this.props.navigate('SignInNavigator')
+                logged(true);
             }
             else{
                 Alert.alert("Authentication failed")

@@ -8,7 +8,8 @@ const title = require('../assets/Kinelogo.png');
 
 
 interface Props {
-    navigation: any
+    navigation: any,
+    logged:any
 }
 
 export default class Login extends React.Component<Props>{
@@ -22,6 +23,7 @@ export default class Login extends React.Component<Props>{
 
     render() {
         const {navigate} =this.props.navigation;
+        const {logged} =this.props;
         return (
             <KeyboardAwareScrollView
                 style={{backgroundColor:"ghostwhite"}}>
@@ -31,7 +33,7 @@ export default class Login extends React.Component<Props>{
                     </View>
                     <View style={{flex: 3,  marginTop:50,justifyContent:"flex-end"}}>
                         <Provider store={store}>
-                                <ConnexionForm navigate={navigate}/>
+                                <ConnexionForm navigate={navigate} logged={logged}/>
                         </Provider>
                     </View>
                 </View>

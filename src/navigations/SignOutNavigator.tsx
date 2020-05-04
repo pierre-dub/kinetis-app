@@ -6,15 +6,25 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-export default class SignOutNavigator extends Component{
+interface Props {
+    logged:any
+}
+
+export default class SignOutNavigator extends Component<Props>{
     constructor(props:any) {
         super(props);
     }
+
     render() {
+        const {logged} =this.props;
         return (
             <Stack.Navigator headerMode={"none"}>
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="SignIn" component={SignIn}/>
+                <Stack.Screen name="Login">
+                    {props => <Login {...props} logged={logged} />}
+                </Stack.Screen>
+                <Stack.Screen name="SignIn">
+                    {props => <SignIn {...props} logged={logged}/>}
+                </Stack.Screen>
             </Stack.Navigator>
         )
     }

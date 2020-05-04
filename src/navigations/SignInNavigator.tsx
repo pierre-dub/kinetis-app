@@ -1,4 +1,4 @@
-import {tabNavigator} from "./TabNavigator";
+import TabNavigator from "./TabNavigator";
 import WorkoutListing from "../views/WorkoutListing";
 import New from "../views/New";
 import Settings from "../views/Settings";
@@ -10,14 +10,21 @@ import PatientListing from "../views/PatientListing";
 
 const Stack = createStackNavigator();
 
-export default class SignInNavigator extends Component{
+interface Props {
+    logged:any
+}
+
+export default class SignInNavigator extends Component<Props>{
     constructor(props:any) {
         super(props);
     }
     render() {
+        const {logged} = this.props;
         return (
             <Stack.Navigator headerMode={"none"}>
-                <Stack.Screen name="Home" component={tabNavigator}/>
+                <Stack.Screen name="Home">
+                    {props => <TabNavigator {...props} logged={logged} />}
+                </Stack.Screen>
                 <Stack.Screen name="Listing" component={WorkoutListing}/>
                 <Stack.Screen name="New" component={New}/>
                 <Stack.Screen name="Patients" component={PatientListing}/>
