@@ -1,14 +1,15 @@
 import React from 'react';
-import {View, Button, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
-import {Field, reduxForm, submit} from 'redux-form';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {Field, reduxForm} from 'redux-form';
 import {setNewWorkout} from "../db/setNewWorkout";
 import WorkoutListing from "../views/WorkoutListing";
 import PicturePicker from "./PicturePicker";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {uploadImage} from "../db/saveImage";
 
+const required = (value: any) => (value ? undefined : 'Required')
 interface Props {
-    navigate: any
+    navigation: any
 }
 
 class NewWorkoutForm extends React.Component<Props> {
@@ -30,7 +31,7 @@ class NewWorkoutForm extends React.Component<Props> {
     onSubmit = async () => {
         let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
         await uploadImage(this.state.image, idWorkout)
-        this.props.navigate("WorkoutListing")
+        this.props.navigation.goBack();
     };
 
 // @ts-ignore

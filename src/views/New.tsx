@@ -12,10 +12,10 @@ export default class New extends React.Component<Props>{
         super(props);
     }
     render() {
-        const {navigate} =this.props.navigation;
+        const {navigation} =this.props;
         return (
         <Provider store={store}>
-            <NewWorkoutForm navigate={navigate}/>
+            <NewWorkoutForm navigation={navigation}/>
         </Provider>
         )
     }
