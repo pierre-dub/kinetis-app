@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {AsyncStorage, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 const title = require('../assets/Kinelogo.png');
 
@@ -12,8 +12,10 @@ export default class Home extends React.Component<Props>{
         super(props);
     }
 
-    onSubmit = () => {
+    onSubmit = async () => {
         const {logged} = this.props;
+        await AsyncStorage.removeItem('userEmail');
+        await AsyncStorage.removeItem('userPassword');
         logged(false)
     }
 

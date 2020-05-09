@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Alert, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Alert, TouchableOpacity, AsyncStorage} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {checkAuthentication} from "../../db/checkAuthentication";
 import {connexionFormValidator} from "../validator/ConnexionFormValidator";
@@ -23,8 +23,10 @@ class ConnexionForm extends React.Component<Props>{
     onSubmit = async (value:any) => {
         if(connexionFormValidator(value).validate) {
             const {logged} = this.props;
-            await checkAuthentication(this.state.email, this.state.password).then((status) => {
+            await checkAuthentication(this.state.email, this.state.password).then(async (status) => {
                 if (status === "200") {
+                    await AsyncStorage.setItem('userEmail', this.state.email);
+                    await AsyncStorage.setItem('userPassword', this.state.password);
                     logged(true);
                 } else {
                     Alert.alert("Authentication failed")

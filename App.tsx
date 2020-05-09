@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StatusBar, View} from "react-native";
+import {AsyncStorage, StatusBar, View} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import SignInNavigator from "./src/navigations/SignInNavigator";
 import SignOutNavigator from "./src/navigations/SignOutNavigator";
 import {Component} from "react";
+import {checkAuthentication} from "./src/db/checkAuthentication";
 
 export default class App extends Component{
 
@@ -13,6 +14,18 @@ export default class App extends Component{
 
     setLogged =  (status:boolean) => {
         this.setState({logged:status})
+    }
+
+    componentDidMount = async () => {
+        let email = await AsyncStorage.getItem('userEmail') || undefined;
+        let password = await AsyncStorage.getItem('userPassword') || undefined;
+        if (email !== undefined && password !== undefined){
+            await checkAuthentication(email, password).then(async (status) => {
+                if (status === "200") {
+                    this.setLogged(true);
+                }
+            })
+        }
     }
 
     render() {
