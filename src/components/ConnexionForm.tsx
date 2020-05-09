@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {checkAuthentication} from "../db/checkAuthentication";
+import {connexionFormValidator} from "./ConnexionFormValidator";
 
 interface Props {
     navigate: any,
-    logged:any
+    logged:any,
+    handleSubmit:any
 }
 
 class ConnexionForm extends React.Component<Props>{
@@ -18,26 +20,46 @@ class ConnexionForm extends React.Component<Props>{
     }
 
 // @ts-ignore
-    renderTextInput = ({ input: { onChange, ...input }, ...rest}) => {
-        return <TextInput style={styles.textInput}
-                          onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="#014a55"
-        />
+    renderTextInput = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
+        let valide = true;
+        if(error !== undefined){
+            valide = false;
+        }
+        return (
+            <View>
+                <TextInput style={styles.textInput}
+                           multiline={true}
+                           onChangeText={onChange} {...input} {...rest}
+                           placeholderTextColor="#014a55"
+                />
+                {submitFailed ? ( !valide ?
+                    <View style={styles.errorContainer}>
+                        <Text style={styles.textErrorValidation}>
+                            ⚠️  {error}
+                        </Text>
+                    </View> : <View/>)
+                    :
+                    <View/>
+                }
+            </View>
+        )
     };
 
-    onSubmit = async () => {
-        const {logged} = this.props;
-        await checkAuthentication(this.state.email, this.state.password).then((status) => {
-            if (status === "200"){
-                logged(true);
-            }
-            else{
-                Alert.alert("Authentication failed")
-            }
-        })
+    onSubmit = async (value:any) => {
+        if(connexionFormValidator(value).validate) {
+            const {logged} = this.props;
+            await checkAuthentication(this.state.email, this.state.password).then((status) => {
+                if (status === "200") {
+                    logged(true);
+                } else {
+                    Alert.alert("Authentication failed")
+                }
+            })
+        }
     };
 
     render() {
+        const {handleSubmit} = this.props
         return (
             <View style={styles.root}>
                 <Field
@@ -57,7 +79,7 @@ class ConnexionForm extends React.Component<Props>{
                     onChange={(text: any) => this.setState({password: text})}
                 />
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
-                    <TouchableOpacity onPress={(this.onSubmit)}>
+                    <TouchableOpacity onPress={handleSubmit(this.onSubmit)}>
                         <View style={styles.button}>
                             <Text style={{color: 'white', fontSize: 20}}>Log In</Text>
                         </View>
@@ -111,8 +133,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: 300,
         height: 60,
+    },
+    errorContainer : {
+        height:24,
+        marginLeft:5
+    },
+    textErrorValidation: {
+        fontSize:12,
+        color: "#FF0000",
     }
 });
 
-// @ts-ignore
-export default reduxForm({form: 'login-form'})(ConnexionForm);
+export default reduxForm({
+    form: 'login-form',
+    // @ts-ignore
+    validate: connexionFormValidator
+})(ConnexionForm);
