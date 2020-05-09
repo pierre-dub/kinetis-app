@@ -1,57 +1,101 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
-import {setNewWorkout} from "../db/setNewWorkout";
-import WorkoutListing from "../views/WorkoutListing";
 import PicturePicker from "./PicturePicker";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {setNewWorkout} from "../db/setNewWorkout";
 import {uploadImage} from "../db/saveImage";
+import {newWorkoutFormValidator} from "./NewWorkoutFormValidator"
+
 
 const required = (value: any) => (value ? undefined : 'Required')
+
 interface Props {
-    navigation: any
+    navigation: any,
+    handleSubmit: any
 }
 
 class NewWorkoutForm extends React.Component<Props> {
     constructor(props: any) {
         super(props);
     }
+
     state:any = {
         title: "",
         description: "",
         repetition: "",
         materiel: "",
-        image: null,
+        image: undefined,
     }
 
     onPictureChange = (imagePicked:any) => {
         this.setState({ image: imagePicked });
     }
 
-    onSubmit = async () => {
-        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
-        await uploadImage(this.state.image, idWorkout)
-        this.props.navigation.goBack();
+    onSubmit = async (value:any) => {
+        if (newWorkoutFormValidator(value).validate){
+            let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
+            if(this.state.image !== undefined){
+                await uploadImage(this.state.image, idWorkout)
+            }
+            this.props.navigation.goBack();
+        }
     };
 
 // @ts-ignore
-    renderTextInput = ({input: {onChange, ...input}, ...rest}) => {
-        return <TextInput style={styles.textInput}
-                          onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="#014a55"
-        />
+    renderTextInput = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
+        let valide = true;
+        if(error !== undefined){
+            valide = false;
+        }
+        return (
+            <View>
+                <TextInput style={styles.textInput}
+                           multiline={true}
+                           onChangeText={onChange} {...input} {...rest}
+                           placeholderTextColor="#014a55"
+                />
+                {submitFailed ? ( !valide ?
+                    <View style={styles.errorContainer}>
+                        <Text style={styles.textErrorValidation}>
+                            ⚠️  {error}
+                        </Text>
+                    </View> : <View/>)
+                    :
+                    <View/>
+                }
+            </View>
+        )
     };
 
 // @ts-ignore
-    renderTextArea = ({input: {onChange, ...input}, ...rest}) => {
-        return <TextInput style={styles.textArea}
-                          multiline={true}
-                          onChangeText={onChange} {...input} {...rest}
-                          placeholderTextColor="#014a55"
-        />
+    renderTextArea = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
+        let valide = true;
+        if(error !== undefined){
+            valide = false;
+        }
+        return (
+            <View>
+                <TextInput style={styles.textArea}
+                           multiline={true}
+                           onChangeText={onChange} {...input} {...rest}
+                           placeholderTextColor="#014a55"
+                />
+                {submitFailed ? ( !valide ?
+                    <View style={styles.errorContainer}>
+                        <Text style={styles.textErrorValidation}>
+                            ⚠️  {error}
+                        </Text>
+                    </View> : <View/>)
+                    :
+                    <View/>
+                }
+            </View>
+        )
     };
 
     render(){
+        const {handleSubmit} = this.props;
         return (
             <KeyboardAwareScrollView>
                 <View style={styles.root}>
@@ -60,7 +104,7 @@ class NewWorkoutForm extends React.Component<Props> {
                     <Field
                         name="title"
                         props={{
-                            placeholder: "Workout name",
+                        //    placeholder: "Power push down",
                         }}
                         component={this.renderTextInput}
                         onChange={(text: any) => this.setState({title: text})}
@@ -69,7 +113,7 @@ class NewWorkoutForm extends React.Component<Props> {
                     <Field
                         name="description"
                         props={{
-                            placeholder: "Description",
+                         //   placeholder: "In a standing position, lean over slightly at the hips keeping the back flat. Begin with the medicine ball at the chest with elbows out to the sides and forcefully push the ball toward the floor underneath the chest. Catch the ball when it rebounds and repeat quickly.",
                         }}
                         component={this.renderTextArea}
                         onChange={(text: any) => this.setState({description: text})}
@@ -78,7 +122,7 @@ class NewWorkoutForm extends React.Component<Props> {
                     <Field
                         name="repetition"
                         props={{
-                            placeholder: "Repetition",
+                         //   placeholder: "10 times",
                         }}
                         component={this.renderTextInput}
                         onChange={(text: any) => this.setState({repetition: text})}
@@ -87,13 +131,13 @@ class NewWorkoutForm extends React.Component<Props> {
                     <Field
                         name="materiel"
                         props={{
-                            placeholder: "Equipment",
+                        //    placeholder: "Medicine Ball",
                         }}
                         component={this.renderTextInput}
                         onChange={(text: any) => this.setState({materiel: text})}
                     />
                     <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
-                        <TouchableOpacity onPress={(this.onSubmit)}>
+                        <TouchableOpacity onPress={handleSubmit(this.onSubmit)}>
                             <View style={styles.button}>
                                 <Text style={{color: 'white', fontSize: 20}}>Save</Text>
                             </View>
@@ -142,8 +186,19 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         width: 200,
         height: 60,
+    },
+    errorContainer : {
+        height:12,
+        marginLeft:5
+    },
+    textErrorValidation: {
+        fontSize:12,
+        color: "#FF0000",
     }
 });
 
-// @ts-ignore
-export default reduxForm({form: 'workout-form'})(NewWorkoutForm);
+export default reduxForm({
+    form: 'workout-form',
+    // @ts-ignore
+    validate: newWorkoutFormValidator,
+})(NewWorkoutForm);
