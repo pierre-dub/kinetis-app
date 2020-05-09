@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import {Field, reduxForm, submit} from 'redux-form';
-import {setNewUser} from "../db/setNewUSer";
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Field, reduxForm} from 'redux-form';
+import {setNewUser} from "../../db/setNewUSer";
 import {CheckBox} from "react-native-elements";
-import {signInValidator} from "./SignInFormValidator";
+import {signInValidator} from "../validator/SignInFormValidator";
+import {renderTextInput} from "../renderTextInput";
 
 interface Props {
     navigate: any,
@@ -36,32 +37,6 @@ class SignInForm extends React.Component<Props> {
         }
     };
 
-// @ts-ignore
-    renderTextInput = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
-        let valide = true;
-        if(error !== undefined){
-            valide = false;
-        }
-        return (
-            <View>
-                <TextInput style={styles.textInput}
-                           multiline={true}
-                           onChangeText={onChange} {...input} {...rest}
-                           placeholderTextColor="#014a55"
-                />
-                {submitFailed ? ( !valide ?
-                    <View style={styles.errorContainer}>
-                        <Text style={styles.textErrorValidation}>
-                            ⚠️  {error}
-                        </Text>
-                    </View> : <View/>)
-                    :
-                    <View/>
-                }
-            </View>
-        )
-    };
-
     renderCheckBox = () => {
         return <CheckBox
             containerStyle={{backgroundColor:'ghostwhite',borderColor:'#014a55'}}
@@ -81,7 +56,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "name",
             }}
-            component={this.renderTextInput}
+            component={renderTextInput}
             onChange={(text: any) => this.setState({name: text})}
             />
                 <Text style={styles.subTitles}>Surname</Text>
@@ -90,7 +65,7 @@ class SignInForm extends React.Component<Props> {
                     props={{
                         placeholder: "surname",
                     }}
-                    component={this.renderTextInput}
+                    component={renderTextInput}
                     onChange={(text: any) => this.setState({surname: text})}
                 />
             <Text style={styles.subTitles}>Password</Text>
@@ -99,7 +74,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "password",
             }}
-            component={this.renderTextInput}
+            component={renderTextInput}
             onChange={(text: any) => this.setState({password: text})}
             />
             <Text style={styles.subTitles}>Password Confirmation</Text>
@@ -108,7 +83,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "password confirmation",
             }}
-            component={this.renderTextInput}
+            component={renderTextInput}
             onChange={(text: any) => this.setState({passwordConfirmation: text})}
             />
             <Text style={styles.subTitles}>Email</Text>
@@ -117,7 +92,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "email",
             }}
-            component={this.renderTextInput}
+            component={renderTextInput}
             onChange={(text: any) => this.setState({email: text})}
             />
             <View style={{paddingTop:20}}>
@@ -149,40 +124,13 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: '#014a55'
     },
-    textInput: {
-        fontSize: 15,
-        padding: 5,
-        marginBottom: 5,
-        borderColor: '#014a55',
-        borderWidth: 1,
-        borderRadius: 4,
-        height: 40,
-        justifyContent: "center"
-    },
-    textArea: {
-        fontSize: 15,
-        padding: 8,
-        marginBottom: 8,
-        borderColor: '#014a55',
-        borderWidth: 1,
-        borderRadius: 4,
-        height: 150,
-        justifyContent: "flex-start",
-    },
-    button:{backgroundColor: '#014a55',
+    button:{
+        backgroundColor: '#014a55',
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 2,
         width: 200,
         height: 60,
-    },
-    errorContainer : {
-        height:12,
-        marginLeft:5
-    },
-    textErrorValidation: {
-        fontSize:12,
-        color: "#FF0000",
     }
 });
 

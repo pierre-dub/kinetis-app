@@ -19,4 +19,3 @@ export const connexionFormValidator = (values:any) => {
     }
     return errors;
 };
-

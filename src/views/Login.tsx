@@ -1,5 +1,5 @@
 import React from "react";
-import ConnexionForm from "../components/ConnexionForm";
+import ConnexionForm from "../components/form/ConnexionForm";
 import {Provider} from "react-redux";
 import store from "../redux/myStore";
 import {Image, StyleSheet, View} from "react-native";

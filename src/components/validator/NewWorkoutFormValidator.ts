@@ -12,6 +12,9 @@ export const newWorkoutFormValidator = (values:any) => {
     } else if (values.title.length < 5) {
         errors.title = "That's a short title, tell us more";
         errors.validate = false;
+    } else if (values.title.length > 45) {
+        errors.title = "That's a long title, be brief";
+        errors.validate = false;
     }
     if (!values.description) {
         errors.description = "Add a short description";
@@ -24,6 +27,5 @@ export const newWorkoutFormValidator = (values:any) => {
         errors.repetition = "Reps is missing, is this workout endless ?";
         errors.validate = false;
     }
-
     return errors;
 };

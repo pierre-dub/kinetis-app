@@ -1,6 +1,6 @@
 import {View} from "react-native";
 import React from "react";
-import SignInForm from "../components/SignInForm";
+import SignInForm from "../components/form/SignInForm";
 import {Provider} from "react-redux";
 import store from "../redux/myStore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'

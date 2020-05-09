@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
-import {checkAuthentication} from "../db/checkAuthentication";
-import {connexionFormValidator} from "./ConnexionFormValidator";
+import {checkAuthentication} from "../../db/checkAuthentication";
+import {connexionFormValidator} from "../validator/ConnexionFormValidator";
+import {renderTextInput} from "../renderTextInput";
 
 interface Props {
     navigate: any,
@@ -18,32 +19,6 @@ class ConnexionForm extends React.Component<Props>{
         email: "",
         password: ""
     }
-
-// @ts-ignore
-    renderTextInput = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
-        let valide = true;
-        if(error !== undefined){
-            valide = false;
-        }
-        return (
-            <View>
-                <TextInput style={styles.textInput}
-                           multiline={true}
-                           onChangeText={onChange} {...input} {...rest}
-                           placeholderTextColor="#014a55"
-                />
-                {submitFailed ? ( !valide ?
-                    <View style={styles.errorContainer}>
-                        <Text style={styles.textErrorValidation}>
-                            ⚠️  {error}
-                        </Text>
-                    </View> : <View/>)
-                    :
-                    <View/>
-                }
-            </View>
-        )
-    };
 
     onSubmit = async (value:any) => {
         if(connexionFormValidator(value).validate) {
@@ -67,7 +42,7 @@ class ConnexionForm extends React.Component<Props>{
                     props={{
                         placeholder: "Email",
                     }}
-                    component={this.renderTextInput}
+                    component={renderTextInput}
                     onChange={(text: any) => this.setState({email: text})}
                 />
                 <Field
@@ -75,7 +50,7 @@ class ConnexionForm extends React.Component<Props>{
                     props={{
                         placeholder: "Password",
                     }}
-                    component={this.renderTextInput}
+                    component={renderTextInput}
                     onChange={(text: any) => this.setState({password: text})}
                 />
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
@@ -106,41 +81,12 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: '#014a55'
     },
-    textInput: {
-        fontSize: 15,
-        padding: 5,
-        marginBottom: 5,
-        borderColor: '#014a55',
-        borderWidth: 1,
-        borderRadius: 5,
-        width:350,
-        height: 50,
-        justifyContent: "center"
-    },
-    textArea: {
-        fontSize: 15,
-        padding: 8,
-        marginBottom: 8,
-        borderColor: '#014a55',
-        borderWidth: 1,
-        borderRadius: 4,
-        height: 150,
-        justifyContent: "flex-start",
-    },
     button:{backgroundColor: '#014a55',
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 10,
         width: 300,
         height: 60,
-    },
-    errorContainer : {
-        height:24,
-        marginLeft:5
-    },
-    textErrorValidation: {
-        fontSize:12,
-        color: "#FF0000",
     }
 });
 
