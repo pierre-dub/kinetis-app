@@ -3,10 +3,12 @@ import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import {Field, reduxForm, submit} from 'redux-form';
 import {setNewUser} from "../db/setNewUSer";
 import {CheckBox} from "react-native-elements";
+import {signInValidator} from "./SignInFormValidator";
 
 interface Props {
     navigate: any,
-    logged:any
+    logged:any,
+    handleSubmit:any
 }
 
 class SignInForm extends React.Component<Props> {
@@ -23,21 +25,41 @@ class SignInForm extends React.Component<Props> {
 
     }
 
-    onSubmit = async () => {
-        const {logged} = this.props;
-        console.log(this.state)
-            let json = await setNewUser(this.state.surname,this.state.name,this.state.password,this.state.email,this.state.kine)
-            .then(
-                logged(true)
-            );
+    onSubmit = async (value:any) => {
+        if (signInValidator(value).validate) {
+            const {logged} = this.props;
+            console.log(this.state)
+            let json = await setNewUser(this.state.surname, this.state.name, this.state.password, this.state.email, this.state.kine)
+                .then(
+                    logged(true)
+                );
+        }
     };
 
 // @ts-ignore
-    renderTextInput = ({input: {onChange, ...input}, ...rest}) => {
-        return <TextInput style={styles.textInput}
-        onChangeText={onChange} {...input} {...rest}
-        placeholderTextColor="#014a55"
-            />
+    renderTextInput = ({input: {onChange, ...input}, meta: {error, submitFailed}, ...rest}) => {
+        let valide = true;
+        if(error !== undefined){
+            valide = false;
+        }
+        return (
+            <View>
+                <TextInput style={styles.textInput}
+                           multiline={true}
+                           onChangeText={onChange} {...input} {...rest}
+                           placeholderTextColor="#014a55"
+                />
+                {submitFailed ? ( !valide ?
+                    <View style={styles.errorContainer}>
+                        <Text style={styles.textErrorValidation}>
+                            ⚠️  {error}
+                        </Text>
+                    </View> : <View/>)
+                    :
+                    <View/>
+                }
+            </View>
+        )
     };
 
     renderCheckBox = () => {
@@ -50,6 +72,7 @@ class SignInForm extends React.Component<Props> {
     };
 
     render(){
+        const {handleSubmit} = this.props
         return (
             <View style={styles.root}>
             <Text style={styles.subTitles}>Name</Text>
@@ -105,7 +128,7 @@ class SignInForm extends React.Component<Props> {
                 />
             </View>
             <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 40}}>
-                <TouchableOpacity onPress={(this.onSubmit)}>
+                <TouchableOpacity onPress={handleSubmit(this.onSubmit)}>
                     <View style={styles.button}>
                         <Text style={{color: 'white', fontSize: 20}}>Create</Text>
                     </View>
@@ -152,8 +175,19 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         width: 200,
         height: 60,
+    },
+    errorContainer : {
+        height:12,
+        marginLeft:5
+    },
+    textErrorValidation: {
+        fontSize:12,
+        color: "#FF0000",
     }
 });
 
-// @ts-ignore
-export default reduxForm({form: 'workout-form'})(SignInForm);
+export default reduxForm({
+    form: 'workout-form',
+    // @ts-ignore
+    validate: signInValidator,
+})(SignInForm);
