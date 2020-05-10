@@ -1,8 +1,9 @@
 import React from 'react'
-import {View, Text, Image, StyleSheet} from 'react-native'
+import {View, Text, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 
 interface Props {
     workout:any,
+    navigation:any
 }
 
 export default class WorkoutDetail extends React.Component<Props> {
@@ -12,6 +13,7 @@ export default class WorkoutDetail extends React.Component<Props> {
     render() {
         // @ts-ignore
         const {workout} = this.props.route.params;
+        const {navigate} = this.props.navigation;
         return (
                 <View style={styleWorkout.main_container}>
                     <Image style={styleWorkout.image} source={{uri: `data:image/gif;base64,${workout.IMAGE}`}}/>
@@ -38,6 +40,15 @@ export default class WorkoutDetail extends React.Component<Props> {
                             <Text style={styleWorkout.description_text}>{workout.MATERIEL}</Text>
                         </View>
                     </View>
+                    <View style={styleWorkout.button_container}>
+                        <TouchableOpacity onPress={() => {
+                            navigate("EditWorkout",{workout : workout})
+                        }}>
+                            <View style={styleWorkout.button}>
+                                <Image style={styleWorkout.icon} source={require('../assets/icons/edit.png')}/>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
         )
     }
@@ -53,6 +64,11 @@ const styleWorkout = StyleSheet.create({
         resizeMode:"cover",
         margin: 5,
         backgroundColor: 'gray'
+    },
+    icon: {
+        resizeMode:"contain",
+        width: 25,
+        height: 25,
     },
     description_container: {
         paddingTop:15,
@@ -93,5 +109,20 @@ const styleWorkout = StyleSheet.create({
     },
     content_container:{
         marginBottom:0
+    },
+    button_container:{
+        position:'absolute',
+        bottom:40,
+        alignSelf:'flex-end',
+        paddingRight:20
+
+    },
+    button:{
+        backgroundColor: '#014a55',
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 50,
+        width: 60,
+        height: 60,
     }
 })

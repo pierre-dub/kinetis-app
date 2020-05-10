@@ -1,8 +1,9 @@
-import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet, AsyncStorage,} from "react-native";
+import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet} from "react-native";
 import React from "react";
 import WorkoutItem from "../components/WorkoutItem";
 import {getMyWorkout} from "../db/getMyWorkout";
 import {getMyWorkoutWithTitle} from "../db/getWorkoutWithTitle";
+import HideWithKeyboard from "react-native-hide-with-keyboard";
 
 interface Props {
     navigation: any,
@@ -61,6 +62,7 @@ export default class WorkoutListing extends React.Component<Props>{
     }
 
      render() {
+        const {navigation} = this.props;
         const {navigate} = this.props.navigation;
         if (this.state.myWorkouts !== null) {
             return (
@@ -74,7 +76,7 @@ export default class WorkoutListing extends React.Component<Props>{
                         <FlatList
                             data={this.state.myWorkouts}
                             renderItem={({item}) =>
-                                <WorkoutItem workout={item} navigate={navigate}/>
+                                <WorkoutItem workout={item} navigation={navigation}/>
                             }
                             keyExtractor={item => item.ID.toString()}
                             refreshing={this.state.refreshing}
@@ -82,13 +84,15 @@ export default class WorkoutListing extends React.Component<Props>{
                         />
                     </SafeAreaView>
                     <View style={styles.button_container}>
-                        <TouchableOpacity onPress={() => {
-                            navigate("New")
-                        }}>
-                            <View style={styles.button}>
-                                <Text style={{color: 'white', fontSize: 35, marginBottom: 5}}>+</Text>
-                            </View>
-                        </TouchableOpacity>
+                        <HideWithKeyboard>
+                            <TouchableOpacity onPress={() => {
+                                navigate("New")
+                            }}>
+                                <View style={styles.button}>
+                                    <Text style={{color: 'white', fontSize: 35, marginBottom: 5}}>+</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </HideWithKeyboard>
                     </View>
                 </View>
             )

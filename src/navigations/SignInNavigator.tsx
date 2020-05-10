@@ -7,6 +7,7 @@ import * as React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import {Component} from "react";
 import PatientListing from "../views/PatientListing";
+import EditWorkout from "../views/EditWorkout";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default class SignInNavigator extends Component<Props>{
                 <Stack.Screen name="Settings" component={Settings}/>
                 <Stack.Screen name="WorkoutListing" component={WorkoutListing}/>
                 <Stack.Screen name="WorkoutDetail" component={WorkoutDetail}/>
+                <Stack.Screen name="EditWorkout" component={EditWorkout}/>
             </Stack.Navigator>
         );
     }

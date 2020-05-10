@@ -6,12 +6,12 @@ import EquipmentItem from "./EquipmentItem";
 
 interface Props {
     workout: any,
-    navigate: any
+    navigation: any
 }
 
 export default class WorkoutItem extends React.Component<Props>{
     render() {
-        const {navigate} =this.props;
+        const {navigate} = this.props.navigation;
         const {workout} = this.props;
         return (
             <TouchableOpacity
