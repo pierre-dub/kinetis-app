@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import PicturePicker from "../PicturePicker";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -43,6 +43,7 @@ class NewWorkoutForm extends React.Component<Props> {
 
     render(){
         const {handleSubmit} = this.props;
+        const {navigation} = this.props;
         return (
             <KeyboardAwareScrollView>
                 <View style={styles.root}>
@@ -87,6 +88,14 @@ class NewWorkoutForm extends React.Component<Props> {
                         <TouchableOpacity onPress={handleSubmit(this.onSubmit)}>
                             <View style={styles.button}>
                                 <Text style={{color: 'white', fontSize: 20}}>Save</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 10}}>
+                        <TouchableOpacity onPress={() => {
+                            navigation.goBack()}}>
+                            <View style={styles.button}>
+                                <Text style={{color: 'white', fontSize: 20}}>Cancel</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
