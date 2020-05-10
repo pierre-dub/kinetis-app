@@ -4,12 +4,17 @@ import {NavigationContainer} from '@react-navigation/native';
 import SignInNavigator from "./src/navigations/SignInNavigator";
 import SignOutNavigator from "./src/navigations/SignOutNavigator";
 import {Component} from "react";
+import {SplashScreen} from "expo";
 import {checkAuthentication} from "./src/db/checkAuthentication";
 
 export default class App extends Component{
+    constructor(props:any) {
+        super(props);
+        SplashScreen.preventAutoHide();
+    }
 
     state: any = {
-        logged:false
+        logged:false,
     };
 
     setLogged =  (status:boolean) => {
@@ -26,16 +31,17 @@ export default class App extends Component{
                 }
             })
         }
+        SplashScreen.hide();
     }
 
     render() {
         return (
             <View style={{flex: 1, marginTop: StatusBar.currentHeight}}>
                 <NavigationContainer>
-                    {this.state.logged  ? (
-                            <SignInNavigator logged={this.setLogged}/>
+                    {this.state.logged ? (
+                        <SignInNavigator logged={this.setLogged}/>
                     ) : (
-                            <SignOutNavigator logged={this.setLogged}/>
+                        <SignOutNavigator logged={this.setLogged}/>
                     )}
                 </NavigationContainer>
             </View>
