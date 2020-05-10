@@ -1,4 +1,4 @@
-import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet,} from "react-native";
+import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet, AsyncStorage,} from "react-native";
 import React from "react";
 import WorkoutItem from "../components/WorkoutItem";
 import {getMyWorkout} from "../db/getMyWorkout";
@@ -14,23 +14,18 @@ export default class WorkoutListing extends React.Component<Props>{
     }
     state: any = {
         myWorkouts: null,
-        searchedTitle: ""
+        searchedTitle: "",
+        refreshing: false,
     };
     fetch: any = {}
 
     componentDidMount(): void {
-        this.fetch = getMyWorkout()
-            .then(res => {
-                this.fetch = null;
-                // @ts-ignore
-                this.setState({myWorkouts : this.sortWorkout(res.data), refreshing: false})
-            })
-    }
-
-    componentWillUnmount(): void {
-        if(this.fetch){
-            this.fetch.cancel();
-        }
+        this.fetch = getMyWorkout().then(async res => {
+            this.fetch = null;
+            let workoutData = this.sortWorkout(res.data);
+            // @ts-ignore
+            this.setState({myWorkouts: workoutData, refreshing: false});
+        })
     }
 
     sortWorkout = (array:any) => {
@@ -65,22 +60,11 @@ export default class WorkoutListing extends React.Component<Props>{
         }
     }
 
-    render() {
-        const {navigate} =this.props.navigation;
-        if(this.state.myWorkouts === null){
-            return(
-                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite'}}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Workout name"
-                        onChangeText={async (text) => await this.searchWorkout(text)}
-                    />
-                </View>
-            )
-        }
-        else{
-            return(
-                <View style={{padding:5, flex:1, backgroundColor:'ghostwhite',paddingBottom:50}}>
+     render() {
+        const {navigate} = this.props.navigation;
+        if (this.state.myWorkouts !== null) {
+            return (
+                <View style={{padding: 5, flex: 1, backgroundColor: 'ghostwhite', paddingBottom: 50}}>
                     <TextInput
                         style={styles.input}
                         placeholder="Workout name"
@@ -89,7 +73,7 @@ export default class WorkoutListing extends React.Component<Props>{
                     <SafeAreaView>
                         <FlatList
                             data={this.state.myWorkouts}
-                            renderItem={({ item }) =>
+                            renderItem={({item}) =>
                                 <WorkoutItem workout={item} navigate={navigate}/>
                             }
                             keyExtractor={item => item.ID.toString()}
@@ -98,15 +82,20 @@ export default class WorkoutListing extends React.Component<Props>{
                         />
                     </SafeAreaView>
                     <View style={styles.button_container}>
-                        <TouchableOpacity onPress={()=>{navigate("New")}}>
+                        <TouchableOpacity onPress={() => {
+                            navigate("New")
+                        }}>
                             <View style={styles.button}>
-                                <Text style={{color: 'white', fontSize: 35, marginBottom:5}}>+</Text>
+                                <Text style={{color: 'white', fontSize: 35, marginBottom: 5}}>+</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                 </View>
             )
         }
+        return (
+            <View style={{padding: 5, flex: 1, backgroundColor: 'ghostwhite', paddingBottom: 50}}/>
+            )
     }
 }
 
