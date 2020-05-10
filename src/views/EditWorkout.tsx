@@ -6,6 +6,7 @@ import EditWorkoutForm from "../components/form/EditWorkoutForm";
 import {Provider} from "react-redux";
 import store from "../redux/myStore";
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import {deleteWorkout} from "../db/deleteWorkout";
 
 interface Props {
     workout:any,
@@ -59,8 +60,8 @@ export default class EditWorkout extends React.Component<Props> {
                             />
                             <DialogButton
                                 text="OK"
-                                color="yellow"
-                                onPress={() => {
+                                onPress={async () => {
+                                    await deleteWorkout(workout.ID)
                                     this.setState({ dialogVisible: false });
                                     navigation.pop(2)
                                 }}
