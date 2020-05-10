@@ -25,11 +25,7 @@ export default class App extends Component{
         let email = await AsyncStorage.getItem('userEmail') || undefined;
         let password = await AsyncStorage.getItem('userPassword') || undefined;
         if (email !== undefined && password !== undefined){
-            await checkAuthentication(email, password).then(async (status) => {
-                if (status === "200") {
-                    this.setLogged(true);
-                }
-            })
+            this.setLogged(true);
         }
         SplashScreen.hide();
     }
