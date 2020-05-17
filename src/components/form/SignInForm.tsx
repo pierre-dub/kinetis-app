@@ -5,6 +5,7 @@ import {setNewUser} from "../../db/setNewUSer";
 import {CheckBox} from "react-native-elements";
 import {signInValidator} from "../validator/SignInFormValidator";
 import {renderTextInput} from "../renderTextInput";
+import {renderPasswordInput} from "../renderPasswordInput";
 
 interface Props {
     navigate: any,
@@ -74,7 +75,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "password",
             }}
-            component={renderTextInput}
+            component={renderPasswordInput}
             onChange={(text: any) => this.setState({password: text})}
             />
             <Text style={styles.subTitles}>Password Confirmation</Text>
@@ -83,7 +84,7 @@ class SignInForm extends React.Component<Props> {
             props={{
                 placeholder: "password confirmation",
             }}
-            component={renderTextInput}
+            component={renderPasswordInput}
             onChange={(text: any) => this.setState({passwordConfirmation: text})}
             />
             <Text style={styles.subTitles}>Email</Text>

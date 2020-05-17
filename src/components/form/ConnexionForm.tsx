@@ -4,6 +4,7 @@ import {Field, reduxForm} from 'redux-form';
 import {checkAuthentication} from "../../db/checkAuthentication";
 import {connexionFormValidator} from "../validator/ConnexionFormValidator";
 import {renderTextInput} from "../renderTextInput";
+import {renderPasswordInput} from "../renderPasswordInput";
 
 interface Props {
     navigate: any,
@@ -52,7 +53,7 @@ class ConnexionForm extends React.Component<Props>{
                     props={{
                         placeholder: "Password",
                     }}
-                    component={renderTextInput}
+                    component={renderPasswordInput}
                     onChange={(text: any) => this.setState({password: text})}
                 />
                 <View style={{alignItems: 'center', justifyContent: 'center',paddingTop:40}}>
