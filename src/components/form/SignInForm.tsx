@@ -28,14 +28,12 @@ class SignInForm extends React.Component<Props> {
     }
 
     onSubmit = async (value:any) => {
-        if (signInValidator(value).validate) {
-            const {logged} = this.props;
-            console.log(this.state)
-            let json = await setNewUser(this.state.surname, this.state.name, this.state.password, this.state.email, this.state.kine)
-                .then(
-                    logged(true)
-                );
-        }
+        const {logged} = this.props;
+        console.log(this.state)
+        let json = await setNewUser(this.state.surname, this.state.name, this.state.password, this.state.email, this.state.kine)
+            .then(
+                logged(true)
+            );
     };
 
     renderCheckBox = () => {

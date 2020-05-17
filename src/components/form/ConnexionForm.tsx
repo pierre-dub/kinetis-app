@@ -22,18 +22,16 @@ class ConnexionForm extends React.Component<Props>{
     }
 
     onSubmit = async (value:any) => {
-        if(connexionFormValidator(value).validate) {
-            const {logged} = this.props;
-            await checkAuthentication(this.state.email, this.state.password).then(async (status) => {
-                if (status === "200") {
-                    await AsyncStorage.setItem('userEmail', this.state.email);
-                    await AsyncStorage.setItem('userPassword', this.state.password);
-                    logged(true);
-                } else {
-                    Alert.alert("Authentication failed")
-                }
-            })
-        }
+        const {logged} = this.props;
+        await checkAuthentication(this.state.email, this.state.password).then(async (status) => {
+            if (status === "200") {
+                await AsyncStorage.setItem('userEmail', this.state.email);
+                await AsyncStorage.setItem('userPassword', this.state.password);
+                logged(true);
+            } else {
+                Alert.alert("Authentication failed")
+            }
+        })
     };
 
     render() {
@@ -95,6 +93,6 @@ const styles = StyleSheet.create({
 
 export default reduxForm({
     form: 'login-form',
-    // @ts-ignore
     validate: connexionFormValidator
+    // @ts-ignore
 })(ConnexionForm);

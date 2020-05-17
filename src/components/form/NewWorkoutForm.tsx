@@ -32,13 +32,11 @@ class NewWorkoutForm extends React.Component<Props> {
     }
 
     onSubmit = async (value:any) => {
-        if (newWorkoutFormValidator(value).validate){
-            let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
-            if(this.state.image !== undefined){
-                await uploadImage(this.state.image, idWorkout)
-            }
-            this.props.navigation.goBack();
+        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
+        if(this.state.image !== undefined){
+            await uploadImage(this.state.image, idWorkout)
         }
+        this.props.navigation.goBack();
     };
 
     render(){
