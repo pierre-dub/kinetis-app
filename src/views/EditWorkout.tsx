@@ -7,10 +7,12 @@ import {Provider} from "react-redux";
 import store from "../redux/myStore";
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {deleteWorkout} from "../db/deleteWorkout";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 interface Props {
     workout:any,
-    navigation:any
+    navigation:any,
+    handleSubmit:any
 }
 
 export default class EditWorkout extends React.Component<Props> {
@@ -28,7 +30,13 @@ export default class EditWorkout extends React.Component<Props> {
         return (
             <View style={styleWorkout.main_container}>
                 <Provider store={store}>
-                    <EditWorkoutForm workout={workout} navigation={navigation}/>
+                    <EditWorkoutForm workout={workout} navigation={navigation} initialValues={
+                        {title : workout.TITLE,
+                        description: workout.DESCRIPTION,
+                        repetition: workout.REPETITION,
+                        materiel: workout.MATERIEL,
+                        image: workout.IMAGE}
+                    }/>
                 </Provider>
                 <Dialog
                     onDismiss={() => {
@@ -88,18 +96,7 @@ export default class EditWorkout extends React.Component<Props> {
                         </TouchableOpacity>
                     </HideWithKeyboard>
                 </View>
-                <View style={styleWorkout.save_button_container}>
-                    <HideWithKeyboard>
-                        <TouchableOpacity onPress={() => {
-                            Alert.alert("Not implemented yet");
-                        }}>
-                            <View style={styleWorkout.buttonSave}>
-                                <Image style={styleWorkout.icon} source={require('../assets/icons/store.png')}/>
-                            </View>
-                        </TouchableOpacity>
-                    </HideWithKeyboard>
-                </View>
-            </View>
+        </View>
         )
     }
 }
@@ -169,20 +166,6 @@ const styleWorkout = StyleSheet.create({
     },
     buttonDelete:{
         backgroundColor: '#c4151c',
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 50,
-        width: 60,
-        height: 60,
-    },
-    save_button_container:{
-        position:'absolute',
-        bottom:40,
-        alignSelf:'flex-end',
-        left: 20
-    },
-    buttonSave:{
-        backgroundColor: '#014a55',
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 50,

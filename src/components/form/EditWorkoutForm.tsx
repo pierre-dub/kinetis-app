@@ -1,21 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert, Image} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {renderTextInput} from "../renderTextInput";
-import {newWorkoutFormValidator} from "../validator/NewWorkoutFormValidator";
 import {renderTextArea} from "../renderTextArea";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import HideWithKeyboard from "react-native-hide-with-keyboard";
+import {editWorkout} from "../../db/editWorkout";
+import {newWorkoutFormValidator} from "../validator/NewWorkoutFormValidator";
 
 interface Props {
     workout:any,
     navigation:any,
-    handleSubmit:any
+    handleSubmit:any,
+    initialValue:any
 }
 
 class EditWorkoutForm extends React.Component<Props>{
     constructor(props:any) {
         super(props);
     }
+
     state:any = {
         title: this.props.workout.TITLE,
         description: this.props.workout.DESCRIPTION,
@@ -25,20 +29,18 @@ class EditWorkoutForm extends React.Component<Props>{
     }
 
     onSubmit = async (value:any) => {
-        if(newWorkoutFormValidator(value).validate) {
-            this.props.navigation.goBack();
-        }
+        //TODO : automatique refresh WorkoutListing
+        await editWorkout(this.props.workout.ID,this.state.title,this.state.description,this.state.repetition,this.state.materiel,"")
+        this.props.navigation.pop(2);
     };
     render() {
-        // @ts-ignore
         const {navigation} = this.props;
         const {handleSubmit} = this.props;
         return(
-
-            <KeyboardAwareScrollView>
+            // <KeyboardAwareScrollView>
                 <View style={styles.main_container}>
-                <View style={styles.title_container}>
-                    <Field
+                    <View style={styles.title_container}>
+                        <Field
                         name="title"
                         props={{
                             value: this.state.title,
@@ -106,8 +108,16 @@ class EditWorkoutForm extends React.Component<Props>{
                             </TouchableOpacity>
                         </View>
                     </View>
+                    <View style={styles.save_button_container}>
+                        <HideWithKeyboard>
+                            <TouchableOpacity onPress={handleSubmit(this.onSubmit)}>
+                                <View style={styles.buttonSave}>
+                                    <Image style={styles.icon} source={require('../../assets/icons/store.png')}/>
+                                </View>
+                            </TouchableOpacity>
+                        </HideWithKeyboard>
+                    </View>
                 </View>
-            </KeyboardAwareScrollView>
         );
     }
 }
@@ -193,11 +203,30 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         width: 200,
         height: 60,
+    },
+    icon: {
+        resizeMode:"contain",
+        width: 30,
+        height: 30,
+    },
+    save_button_container:{
+        position:'absolute',
+        bottom:40,
+        alignSelf:'flex-end',
+        left: 20
+    },
+    buttonSave:{
+        backgroundColor: '#014a55',
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 50,
+        width: 60,
+        height: 60,
     }
 });
 
 export default reduxForm({
     form: 'edit-workout-form',
-    // @ts-ignore
     validate: newWorkoutFormValidator
+    // @ts-ignore
 })(EditWorkoutForm);
