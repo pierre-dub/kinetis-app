@@ -1,11 +1,10 @@
 import * as React from 'react';
+import {Component} from 'react';
 import {AsyncStorage, StatusBar, View} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import SignInNavigator from "./src/navigations/SignInNavigator";
 import SignOutNavigator from "./src/navigations/SignOutNavigator";
-import {Component} from "react";
 import {SplashScreen} from "expo";
-import {checkAuthentication} from "./src/db/checkAuthentication";
 
 export default class App extends Component{
     constructor(props:any) {

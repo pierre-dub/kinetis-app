@@ -1,13 +1,12 @@
 import React from 'react'
-import {View, Text, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 // @ts-ignore
-import Dialog, { DialogContent, DialogTitle, DialogButton, DialogFooter } from 'react-native-popup-dialog';
+import Dialog, {DialogButton, DialogContent, DialogFooter, DialogTitle} from 'react-native-popup-dialog';
 import EditWorkoutForm from "../components/form/EditWorkoutForm";
 import {Provider} from "react-redux";
-import store from "../redux/myStore";
+import store from "../redux/store";
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {deleteWorkout} from "../db/deleteWorkout";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 interface Props {
     workout:any,

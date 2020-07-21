@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
 interface Props {
     workout:any,

@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import PicturePicker from "../PicturePicker";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import {setNewWorkout} from "../../db/setNewWorkout";
 import {uploadImage} from "../../db/saveImage";
 import {newWorkoutFormValidator} from "../validator/NewWorkoutFormValidator"
@@ -31,9 +31,9 @@ class NewWorkoutForm extends React.Component<Props> {
         this.setState({ image: imagePicked });
     }
 
-    onSubmit = async (value:any) => {
-        let idWorkout = await setNewWorkout(this.state.title,this.state.description,this.state.repetition,this.state.materiel,this.state.image)
-        if(this.state.image !== undefined){
+    onSubmit = async () => {
+        let idWorkout = await setNewWorkout(this.state.title, this.state.description, this.state.repetition, this.state.materiel, this.state.image)
+        if (this.state.image !== undefined) {
             await uploadImage(this.state.image, idWorkout)
         }
         this.props.navigation.goBack();
@@ -100,7 +100,7 @@ class NewWorkoutForm extends React.Component<Props> {
                 </View>
             </KeyboardAwareScrollView>
         );
-    };
+    }
 }
 
 const styles = StyleSheet.create({

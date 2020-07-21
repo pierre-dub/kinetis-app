@@ -25,7 +25,7 @@ export function renderTextInput({input: {onChange, ...input}, meta: {error, subm
             }
         </View>
     )
-};
+}
 
 const styles = StyleSheet.create({
     textInput: {

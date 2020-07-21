@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Component} from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from "../views/Home";
 import WorkoutListing from "../views/WorkoutListing";
-import Patient from "../views/PatientListing";
 import {Image, StyleSheet} from "react-native";
-import {Component} from "react";
 
 const Tab = createBottomTabNavigator();
 
 interface Props {
-    logged:any
+    logged: any
 }
 
 export default class TabNavigator extends Component<Props>{
@@ -30,7 +29,7 @@ export default class TabNavigator extends Component<Props>{
                 <Tab.Screen name="Home"
                             options={{
                                 tabBarLabel: 'Home',
-                                tabBarIcon: ({}) => (
+                                tabBarIcon: () => (
                                     <Image style={styleListing.image}
                                            source={require('../assets/icons/home_white.png')}/>
                                 ),
@@ -42,8 +41,9 @@ export default class TabNavigator extends Component<Props>{
                             component={WorkoutListing}
                             options={{
                                 tabBarLabel: 'WorkoutListing',
-                                tabBarIcon: ({ }) => (
-                                    <Image style={styleListing.image} source={require('../assets/icons/list_white.png')}/>
+                                tabBarIcon: () => (
+                                    <Image style={styleListing.image}
+                                           source={require('../assets/icons/list_white.png')}/>
                                 ),
                             }}
                 />

@@ -1,18 +1,19 @@
 import React from "react";
 import ConnexionForm from "../components/form/ConnexionForm";
 import {Provider} from "react-redux";
-import store from "../redux/myStore";
+import store from "../redux/store";
 import {Image, StyleSheet, View} from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+
 const title = require('../assets/Kinelogo.png');
 
 
 interface Props {
     navigation: any,
-    logged:any
+    logged: any
 }
 
-export default class Login extends React.Component<Props>{
+export default class Login extends React.Component<Props> {
     constructor(props:any) {
         super(props);
     }

@@ -1,4 +1,4 @@
-import {Switch, Text, TouchableOpacity, View} from "react-native";
+import {Switch, Text, View} from "react-native";
 import * as React from "react";
 
 export default class Settings extends React.Component{

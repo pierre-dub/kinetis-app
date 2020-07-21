@@ -25,7 +25,7 @@ export function renderPasswordInput({input: {onChange, ...input}, meta: {error, 
             }
         </View>
     )
-};
+}
 
 const styles = StyleSheet.create({
     textInput: {

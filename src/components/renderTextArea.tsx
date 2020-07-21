@@ -25,7 +25,7 @@ export function renderTextArea({input: {onChange, ...input}, meta: {error, submi
             }
         </View>
     )
-};
+}
 
 const styles = StyleSheet.create({
     textArea: {

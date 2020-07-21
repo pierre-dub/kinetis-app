@@ -1,4 +1,4 @@
-import {SafeAreaView, FlatList, View, TouchableOpacity, Text, TextInput, StyleSheet} from "react-native";
+import {FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React from "react";
 import WorkoutItem from "../components/WorkoutItem";
 import {getMyWorkout} from "../db/getMyWorkout";
@@ -51,7 +51,7 @@ export default class WorkoutListing extends React.Component<Props>{
     }
 
     searchWorkout = async (titre: any) => {
-        await this.setState({searchedTitle: titre})
+        this.setState({searchedTitle: titre})
         if (this.state.searchedTitle.length > 0) {
             getMyWorkoutWithTitle(this.state.searchedTitle).then(res => {
                 this.setState({myWorkouts : this.sortWorkout(res.data), refreshing: false})

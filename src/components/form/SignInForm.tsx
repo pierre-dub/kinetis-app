@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {setNewUser} from "../../db/setNewUSer";
 import {CheckBox} from "react-native-elements";
@@ -27,10 +27,10 @@ class SignInForm extends React.Component<Props> {
 
     }
 
-    onSubmit = async (value:any) => {
+    onSubmit = async () => {
         const {logged} = this.props;
         console.log(this.state)
-        let json = await setNewUser(this.state.surname, this.state.name, this.state.password, this.state.email, this.state.kine)
+        await setNewUser(this.state.surname, this.state.name, this.state.password, this.state.email, this.state.kine)
             .then(
                 logged(true)
             );
@@ -110,7 +110,7 @@ class SignInForm extends React.Component<Props> {
             </View>
         </View>
     );
-    };
+    }
 }
 
 const styles = StyleSheet.create({
