@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert, Image} from 'react-native';
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import {renderTextInput} from "../renderTextInput";
 import {renderTextArea} from "../renderTextArea";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import HideWithKeyboard from "react-native-hide-with-keyboard";
 import {editWorkout} from "../../db/editWorkout";
 import {newWorkoutFormValidator} from "../validator/NewWorkoutFormValidator";
@@ -20,7 +19,7 @@ class EditWorkoutForm extends React.Component<Props>{
         super(props);
     }
 
-    state:any = {
+    state: any = {
         title: this.props.workout.TITLE,
         description: this.props.workout.DESCRIPTION,
         repetition: this.props.workout.REPETITION,
@@ -28,18 +27,19 @@ class EditWorkoutForm extends React.Component<Props>{
         image: this.props.workout.IMAGE,
     }
 
-    onSubmit = async (value:any) => {
-        //TODO : automatique refresh WorkoutListing
-        await editWorkout(this.props.workout.ID,this.state.title,this.state.description,this.state.repetition,this.state.materiel,"")
+    onSubmit = async () => {
+        //TODO : automatique refresh WorkoutListing + keyboardAwareScrollView + logout(puis reconnection direct)
+        await editWorkout(this.props.workout.ID, this.state.title, this.state.description, this.state.repetition, this.state.materiel, "")
         this.props.navigation.pop(2);
     };
+
     render() {
         const {navigation} = this.props;
         const {handleSubmit} = this.props;
-        return(
+        return (
             // <KeyboardAwareScrollView>
-                <View style={styles.main_container}>
-                    <View style={styles.title_container}>
+            <View style={styles.main_container}>
+                <View style={styles.title_container}>
                         <Field
                         name="title"
                         props={{
